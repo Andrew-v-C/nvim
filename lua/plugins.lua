@@ -26,7 +26,7 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
     spec = {
         -- Add your plugins here
-        {
+        {  -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
             config = function()
                 require("nvim-treesitter.configs").setup({
@@ -42,24 +42,26 @@ require("lazy").setup({
                 })
             end,
         },
-        {
+        {  -- nvim-lspconfig
             "neovim/nvim-lspconfig",
         },
-        {
+        {  -- mason
             "mason-org/mason.nvim",
             config = function()
                 require("mason").setup()
             end,
         },
-        {
+        {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
-            opts = {},
+            opts = {
+                ensure_installed = { "lua_ls", "clangd", },
+            },
             dependencies = {
                 { "mason-org/mason.nvim", opts = {} },
                 "neovim/nvim-lspconfig",
             },
         },
-        {
+        {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
             ---@module "ibl"
@@ -71,7 +73,7 @@ require("lazy").setup({
                 })
             end,
         },
-        {
+        {  -- colorscheme kanagawa
             "rebelot/kanagawa.nvim",
             config = function()
                 vim.cmd("colorscheme kanagawa")  -- Set color scheme
@@ -83,5 +85,11 @@ require("lazy").setup({
     install = { colorscheme = { "kanagawa" } },
     -- Automatically check for plugin updates
     checker = { enabled = true },
+})
+
+vim.lsp.config("lua_ls", {
+    settings = {
+        Lua = { diagnostics = { globals = { "vim", }, }, },
+    },
 })
 

@@ -35,7 +35,6 @@ vim.opt.fillchars:append({
     foldsep = ' ',
 })
 vim.opt.statuscolumn = " %s%l %C "
-vim.cmd("nnoremap <Space> za")
 
 vim.cmd("inoremap {<Enter> {<Enter>}<Esc>O")  -- Auto-close braces for blocks
 vim.cmd("autocmd FileType * set formatoptions-=cro")  -- Don't auto comment
