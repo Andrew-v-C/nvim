@@ -27,6 +27,48 @@ require("lazy").setup({
     spec = {
         -- Add your plugins here
         {
+            "nvim-treesitter/nvim-treesitter",
+            config = function()
+                require("nvim-treesitter.configs").setup({
+                    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+                    auto_install = true,
+                    highlight = {
+                        enable = false,
+                        additional_vim_regex_highlighting = false,
+                    },
+                })
+            end,
+        },
+        {
+            "neovim/nvim-lspconfig",
+            config = function()
+                vim.lsp.enable("clangd")
+                vim.lsp.enable("lua-language-server")
+                vim.lsp.enable("arduino-language-server")
+            end,
+        },
+        {
+            "mason-org/mason.nvim",
+            config = function()
+                require("mason").setup()
+            end,
+        },
+        {
+            "kevinhwang91/promise-async", 
+        },
+        {
+            "kevinhwang91/nvim-ufo",
+            config = function()
+                require("ufo").setup({
+                    provider_selector = function(bufnr, filetype, buftype)
+                        return {"treesitter", "indent"}
+                    end
+                })
+                vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+                vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+            end,
+        },
+        {
             "rebelot/kanagawa.nvim",
             config = function()
                 vim.cmd("colorscheme kanagawa")  -- Set color scheme
