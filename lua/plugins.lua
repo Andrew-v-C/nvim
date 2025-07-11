@@ -36,16 +36,14 @@ require("lazy").setup({
                         enable = false,
                         additional_vim_regex_highlighting = false,
                     },
+                    indent = {
+                        enable = false,
+                    },
                 })
             end,
         },
         {
             "neovim/nvim-lspconfig",
-            config = function()
-                vim.lsp.enable("clangd")
-                vim.lsp.enable("lua-language-server")
-                vim.lsp.enable("arduino-language-server")
-            end,
         },
         {
             "mason-org/mason.nvim",
@@ -54,18 +52,23 @@ require("lazy").setup({
             end,
         },
         {
-            "kevinhwang91/promise-async", 
+            "mason-org/mason-lspconfig.nvim",
+            opts = {},
+            dependencies = {
+                { "mason-org/mason.nvim", opts = {} },
+                "neovim/nvim-lspconfig",
+            },
         },
         {
-            "kevinhwang91/nvim-ufo",
+            "lukas-reineke/indent-blankline.nvim",
+            main = "ibl",
+            ---@module "ibl"
+            ---@type ibl.config
+            opts = {},
             config = function()
-                require("ufo").setup({
-                    provider_selector = function(bufnr, filetype, buftype)
-                        return {"treesitter", "indent"}
-                    end
+                require("ibl").setup({
+                    indent = { char = '▏' },
                 })
-                vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-                vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
             end,
         },
         {
