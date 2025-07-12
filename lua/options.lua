@@ -38,7 +38,8 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
     callback = function()
         vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        vim.opt.statuscolumn = " %s%l %{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) != -1 ? '▶' : '▼') : ' '} "
+        vim.opt.statuscolumn = " %s%l %{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) != -1 ? '' : '') : ' '} "
+        -- ▶ ▼
     end,
 })
 
