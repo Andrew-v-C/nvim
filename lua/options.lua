@@ -1,6 +1,6 @@
 
 vim.opt.number = true  -- Show line numbers
-vim.opt.relativenumber = true -- Enable relative line numbers
+--vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true  -- Highlight current line
 vim.opt.scrolloff = 999  -- Set scrolling behaviour
 vim.opt.list = true  -- Show "list" characters
@@ -32,18 +32,15 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
-    command = "set foldexpr=v:lua.vim.treesitter.foldexpr()",
+    callback = function()
+        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.opt.statuscolumn = " %s%l %{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) != -1 ? '▶' : '▼') : ' '} "
+    end,
 })
 vim.opt.foldlevel = 99
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
-vim.opt.fillchars:append({
-    fold = ' ',
-    foldopen = '▼',
-    foldclose = '▶',
-    foldsep = ' ',
-})
-vim.opt.statuscolumn = " %s%l %C "
+vim.opt.fillchars:append({ fold = ' ' })
 
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
