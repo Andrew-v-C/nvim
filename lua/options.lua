@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Configure folding
+-- Set up folding
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
@@ -39,7 +39,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
         vim.opt.statuscolumn = " %s%l %{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) != -1 ? '' : '') : ' '} "
-        -- ▶ ▼
     end,
 })
 
