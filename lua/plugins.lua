@@ -51,8 +51,6 @@ require("lazy").setup({
             "Saghen/blink.cmp",
             dependencies = { "rafamadriz/friendly-snippets" },
             version = "1.*",
-            ---@module "blink.cmp"
-            ---@type blink.cmp.Config
             opts = {
                 keymap = { preset = "super-tab" },
                 appearance = { nerd_font_variant = "mono", },
@@ -68,14 +66,7 @@ require("lazy").setup({
         {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
-            ---@module "ibl"
-            ---@type ibl.config
-            opts = {},
-            config = function()
-                require("ibl").setup({
-                    indent = { char = '▏' },
-                })
-            end,
+            opts = { indent = { char = '▏' }, },
         },
         {  -- colorscheme kanagawa
             "rebelot/kanagawa.nvim",

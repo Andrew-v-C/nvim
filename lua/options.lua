@@ -15,15 +15,25 @@ vim.opt.splitright = true  -- Open new windows to the right
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 
 -- Set tabs/indentation
-vim.cmd("autocmd FileType * set expandtab")
-vim.cmd("autocmd FileType * set shiftwidth=4")
-vim.cmd("autocmd FileType * set tabstop=4")
-vim.cmd("autocmd FileType * set softtabstop=4")
-vim.cmd("autocmd FileType * set cindent")
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "*" },
+    callback = function()
+        vim.opt.expandtab = true
+        vim.opt.shiftwidth = 4
+        vim.opt.tabstop = 4
+        vim.opt.softtabstop = 4
+        vim.opt.cindent = true
+        vim.opt.formatoptions = ""
+    end,
+})
 
 -- Configure folding
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "*" },
+    command = "set foldexpr=v:lua.vim.treesitter.foldexpr()",
+})
 vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "1"
 vim.opt.foldtext = ""
@@ -35,8 +45,7 @@ vim.opt.fillchars:append({
 })
 vim.opt.statuscolumn = " %s%l %C "
 
-vim.cmd("inoremap {<Enter> {<Enter>}<Esc>O")  -- Auto-close braces for blocks
-vim.cmd("autocmd FileType * set formatoptions-=cro")  -- Don't auto comment
+vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
