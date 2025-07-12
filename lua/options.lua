@@ -1,6 +1,6 @@
 
 vim.opt.number = true  -- Show line numbers
---vim.opt.relativenumber = true -- Enable relative line numbers
+vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true  -- Highlight current line
 vim.opt.scrolloff = 999  -- Set scrolling behaviour
 vim.opt.list = true  -- Show "list" characters
@@ -30,6 +30,10 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Configure folding
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
+vim.opt.foldlevel = 99
+vim.opt.foldcolumn = "0"
+vim.opt.foldtext = ""
+vim.opt.fillchars:append({ fold = ' ' })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
     callback = function()
@@ -37,14 +41,11 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.statuscolumn = " %s%l %{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) != -1 ? '▶' : '▼') : ' '} "
     end,
 })
-vim.opt.foldlevel = 99
-vim.opt.foldcolumn = "0"
-vim.opt.foldtext = ""
-vim.opt.fillchars:append({ fold = ' ' })
 
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
-vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
+vim.keymap.set("n", "<Space>", "za")  -- Use Space to open/close folds
 
+vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
 
 -- Set up diagnostics
