@@ -1,6 +1,6 @@
 
 vim.opt.number = true  -- Show line numbers
---vim.opt.relativenumber = true -- Enable relative line numbers
+vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true  -- Highlight current line
 vim.opt.scrolloff = 999  -- Set scrolling behaviour
 vim.opt.list = true  -- Show "list" characters
@@ -24,7 +24,6 @@ vim.cmd("autocmd FileType * set cindent")
 -- Configure folding
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "1"
 vim.opt.foldtext = ""
@@ -41,4 +40,10 @@ vim.cmd("autocmd FileType * set formatoptions-=cro")  -- Don't auto comment
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
+
+-- Set up diagnostics
+vim.diagnostic.config({
+    severity_sort = true,
+    virtual_text = { severity = vim.diagnostic.severity.ERROR, },
+})
 

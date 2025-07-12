@@ -28,38 +28,42 @@ require("lazy").setup({
         -- Add your plugins here
         {  -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
+            opts = {
+                lazy = false,
+                branch = "main",
+                build = ":TSUpdate",
+            },
             config = function()
-                require("nvim-treesitter.configs").setup({
-                    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-                    auto_install = true,
-                    highlight = {
-                        enable = false,
-                        additional_vim_regex_highlighting = false,
-                    },
-                    indent = {
-                        enable = false,
-                    },
-                })
-            end,
-        },
-        {  -- nvim-lspconfig
-            "neovim/nvim-lspconfig",
-        },
-        {  -- mason
-            "mason-org/mason.nvim",
-            config = function()
-                require("mason").setup()
+                vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
             end,
         },
         {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
+            dependencies = {
+                "neovim/nvim-lspconfig",
+                { "mason-org/mason.nvim", opts = {} },
+            },
             opts = {
                 ensure_installed = { "lua_ls", "clangd", },
             },
-            dependencies = {
-                { "mason-org/mason.nvim", opts = {} },
-                "neovim/nvim-lspconfig",
+        },
+        {  -- blink.cmp
+            "Saghen/blink.cmp",
+            dependencies = { "rafamadriz/friendly-snippets" },
+            version = "1.*",
+            ---@module "blink.cmp"
+            ---@type blink.cmp.Config
+            opts = {
+                keymap = { preset = "super-tab" },
+                appearance = { nerd_font_variant = "mono", },
+                completion = {
+                    documentation = { auto_show = false, },
+                    trigger = { show_in_snippet = false, },
+                },
+                sources = { default = { "lsp", "path", "snippets", "buffer", }, },
+                fuzzy = { implementation = "prefer_rust_with_warning", },
             },
+            opts_extend = { "sources.default" },
         },
         {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
@@ -87,6 +91,7 @@ require("lazy").setup({
     checker = { enabled = true },
 })
 
+-- Add "vim" to global variables for lua_ls
 vim.lsp.config("lua_ls", {
     settings = {
         Lua = { diagnostics = { globals = { "vim", }, }, },
