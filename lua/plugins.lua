@@ -33,9 +33,6 @@ require("lazy").setup({
                 branch = "main",
                 build = ":TSUpdate",
             },
-            config = function()
-                vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            end,
         },
         {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
@@ -49,7 +46,7 @@ require("lazy").setup({
         },
         {  -- blink.cmp
             "Saghen/blink.cmp",
-            dependencies = { "rafamadriz/friendly-snippets" },
+            -- dependencies = { "rafamadriz/friendly-snippets" },
             version = "1.*",
             opts = {
                 keymap = { preset = "super-tab" },
@@ -71,7 +68,7 @@ require("lazy").setup({
         {  -- colorscheme kanagawa
             "rebelot/kanagawa.nvim",
             config = function()
-                vim.cmd("colorscheme kanagawa")  -- Set color scheme
+                vim.cmd("colorscheme kanagawa")
             end,
         },
     },
