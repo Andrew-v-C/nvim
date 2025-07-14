@@ -1,3 +1,4 @@
+
 -- Lines and scrolling
 vim.opt.number = true  -- Show line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers
@@ -159,11 +160,11 @@ MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
     local output = ""
     .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
-    .."%#"..modeBorderHighlights[mode].."#" -- Border for current mode
-    .."%#StatusLine# %F "  -- File path
+    .."%#"..modeBorderHighlights[mode].."#"  -- Border for current mode
+    .."%#StatusLine# %<%F "  -- File path
     .." %#WarningMsg#%{&modified ? \"modified\" : \"\"} "  -- Show if file was modified
     .."%#StatusLine#%="  -- Spacing
-    local count = vim.diagnostic.count()  -- Diagnostics
+    local count = vim.diagnostic.count()  -- Diagnostics count
     if count[1] ~= nil then
         output = output.."%#DiagnosticError# "..signs[1].." "..count[1].." "
     end
