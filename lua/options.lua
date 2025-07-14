@@ -1,4 +1,3 @@
-
 -- Lines and scrolling
 vim.opt.number = true  -- Show line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers
@@ -95,35 +94,87 @@ local modeNames = {
     ["t"] = "TERMINAL",
 }
 local modeHighlights = {
-    ["n"] = "CurSearch",
-    ["v"] = "CurSearch",
-    ["V"] = "CurSearch",
-    [""]= "CurSearch",
-    ["s"] = "CurSearch",
-    ["S"] = "CurSearch",
-    [""]= "CurSearch",
-    ["i"] = "CurSearch",
-    ["R"] = "CurSearch",
-    ["c"] = "CurSearch",
-    ["t"] = "CurSearch",
+    ["n"] = "StatuslineNormal",
+    ["v"] = "StatuslineVisual",
+    ["V"] = "StatuslineVisual",
+    [""]= "StatuslineVisual",
+    ["s"] = "StatuslineSelect",
+    ["S"] = "StatuslineSelect",
+    [""]= "StatuslineSelect",
+    ["i"] = "StatuslineInsert",
+    ["R"] = "StatuslineReplace",
+    ["c"] = "StatuslineCommand",
+    ["t"] = "StatuslineTerminal",
 }
+local modeBorderHighlights = {
+    ["n"] = "StatuslineBorderNormal",
+    ["v"] = "StatuslineBorderVisual",
+    ["V"] = "StatuslineBorderVisual",
+    [""]= "StatuslineBorderVisual",
+    ["s"] = "StatuslineBorderSelect",
+    ["S"] = "StatuslineBorderSelect",
+    [""]= "StatuslineBorderSelect",
+    ["i"] = "StatuslineBorderInsert",
+    ["R"] = "StatuslineBorderReplace",
+    ["c"] = "StatuslineBorderCommand",
+    ["t"] = "StatuslineBorderTerminal",
+}
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        local termColors = {
+            ["black"] = vim.g.terminal_color_0,
+            ["red"] = vim.g.terminal_color_1,
+            ["green"] = vim.g.terminal_color_2,
+            ["yellow"] = vim.g.terminal_color_3,
+            ["blue"] = vim.g.terminal_color_4,
+            ["purple"] = vim.g.terminal_color_5,
+            ["cyan"] = vim.g.terminal_color_6,
+            ["white"] = vim.g.terminal_color_7,
+            ["bright black"] = vim.g.terminal_color_8,
+            ["bright red"] = vim.g.terminal_color_9,
+            ["bright green"] = vim.g.terminal_color_10,
+            ["bright yellow"] = vim.g.terminal_color_11,
+            ["bright blue"] = vim.g.terminal_color_12,
+            ["bright purple"] = vim.g.terminal_color_13,
+            ["bright cyan"] = vim.g.terminal_color_14,
+            ["bright white"] = vim.g.terminal_color_15,
+        }
+        vim.api.nvim_set_hl(0, "StatuslineNormal",   { fg = termColors["black"], bg = termColors["green"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineVisual",   { fg = termColors["black"], bg = termColors["blue"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineSelect",   { fg = termColors["black"], bg = termColors["purple"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineInsert",   { fg = termColors["black"], bg = termColors["yellow"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineReplace",  { fg = termColors["black"], bg = termColors["red"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineCommand",  { fg = termColors["black"], bg = termColors["cyan"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineTerminal", { fg = termColors["black"], bg = termColors["cyan"], bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderNormal",   { fg = termColors["green"], })
+        vim.api.nvim_set_hl(0, "StatuslineBorderVisual",   { fg = termColors["blue"], })
+        vim.api.nvim_set_hl(0, "StatuslineBorderSelect",   { fg = termColors["purple"], })
+        vim.api.nvim_set_hl(0, "StatuslineBorderInsert",   { fg = termColors["yellow"], })
+        vim.api.nvim_set_hl(0, "StatuslineBorderReplace",  { fg = termColors["red"], })
+        vim.api.nvim_set_hl(0, "StatuslineBorderCommand",  { fg = termColors["cyan"], })
+        vim.api.nvim_set_hl(0, "StatuslineBorderTerminal", { fg = termColors["cyan"], })
+    end
+})
 MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
-    local output = "%#"..modeHighlights[mode].."# "..modeNames[mode].." %#StatusLine#"
-    output = output.." %#StatusLineNC#%F%#StatusLine#"
-    output = output.."  %#WarningMsg#%{&modified ? \"modified\" : \"\"}%#StatusLine#%="
-    local count = vim.diagnostic.count()
+    local output = ""
+    .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
+    .."%#"..modeBorderHighlights[mode].."#" -- Border for current mode
+    .."%#StatusLine# %F "  -- File path
+    .." %#WarningMsg#%{&modified ? \"modified\" : \"\"} "  -- Show if file was modified
+    .."%#StatusLine#%="  -- Spacing
+    local count = vim.diagnostic.count()  -- Diagnostics
     if count[1] ~= nil then
-        output = output.."%#DiagnosticError#"..signs[1].." "..count[1].."  "
+        output = output.."%#DiagnosticError# "..signs[1].." "..count[1].." "
     end
     if count[2] ~= nil then
-        output = output.."%#DiagnosticWarn#"..signs[2].." "..count[2].."  "
+        output = output.."%#DiagnosticWarn# "..signs[2].." "..count[2].." "
     end
     if count[3] ~= nil then
-        output = output.."%#DiagnosticInfo#"..signs[3].." "..count[3].."  "
+        output = output.."%#DiagnosticInfo# "..signs[3].." "..count[3].." "
     end
     if count[4] ~= nil then
-        output = output.."%#DiagnosticHint#"..signs[4].." "..count[4].."  "
+        output = output.."%#DiagnosticHint# "..signs[4].." "..count[4].." "
     end
     return output
 end
