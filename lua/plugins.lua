@@ -68,13 +68,39 @@ require("lazy").setup({
         {  -- colorscheme kanagawa
             "rebelot/kanagawa.nvim",
             config = function()
-                vim.cmd("colorscheme kanagawa")
+                vim.cmd("colorscheme kanagawa-wave")
             end,
+        },
+        {  -- colorschemes to try
+            {
+                "catppuccin/nvim",
+            },
+            {
+                "folke/tokyonight.nvim",
+            },
+            {
+                "rose-pine/neovim",
+            },
+            {
+                "EdenEast/nightfox.nvim",
+            },
+            {
+                "navarasu/onedark.nvim",
+            },
+            {
+                "sainnhe/gruvbox-material",
+            },
+            {
+                "projekt0n/github-nvim-theme",
+            },
+            {
+                "sainnhe/everforest",
+            },
         },
     },
     -- Configure any other settings here; see the documentation for more details
     -- Colorscheme that will be used when installing plugins
-    install = { colorscheme = { "kanagawa" } },
+    install = { colorscheme = { "default" } },
     -- Automatically check for plugin updates
     checker = { enabled = true },
 })
