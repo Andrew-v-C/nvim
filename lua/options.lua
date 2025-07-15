@@ -128,7 +128,7 @@ MyStatusLine = function()
     .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
     .."%#"..modeBorderHighlights[mode].."#"  -- Border for current mode
     .."%#StatusLine# %<%F "  -- File path
-    .."%#WarningMsg#%{&modified ? ' modified ' : ''}"  -- Show if file was modified
+    .."%#WarningMsg#%{&modified ? '[+]' : ''}"  -- Show if file was modified
     .."%#StatusLine#%="  -- Spacing
     local count = vim.diagnostic.count()  -- Diagnostics count
     local signs = vim.diagnostic.config().signs.text
