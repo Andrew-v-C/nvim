@@ -65,13 +65,11 @@ require("lazy").setup({
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
-        {  -- colorschemes
-            {
-                "navarasu/onedark.nvim",
-                config = function()
-                    vim.cmd("colorscheme onedark")
-                end
-            },
+        {  -- onedark colorscheme
+            "navarasu/onedark.nvim",
+            config = function()
+                vim.cmd("colorscheme onedark")
+            end
         },
     },
     -- Configure any other settings here; see the documentation for more details

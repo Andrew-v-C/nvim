@@ -19,9 +19,7 @@ vim.opt.splitright = true  -- Open new windows to the right
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from treesitter
-    -- TODO: See if there's a cleaner way to do this;
-    -- pattern = { "*" } throws an error related to treesitter and blink.cmp
-    pattern = { "lua", "c", "cpp", "python", "java", "arduino", },
+    pattern = { "<filetype>" },
     callback = function() vim.treesitter.start() end,
 })
 
@@ -38,22 +36,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Format status column
-MyStatusCol = function()
-    local output = " %s%l "
-    if string.sub(vim.treesitter.foldexpr(), 1, 1) == ">" then
-        if vim.fn.foldclosed(vim.v.lnum) == -1 then
-            output = output..""
-        else
-            output = output..""
-        end
-    else
-        output = output.." "
-    end
-    output = output.." "
-    return output
-end
-
 -- Set up folding
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
@@ -65,7 +47,8 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
     callback = function()
         vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        vim.opt.statuscolumn = "%!v:lua.MyStatusCol()"
+        vim.opt.statuscolumn = " %s%l "  -- Configure status column
+        .."%{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) == -1 ? '' : '') : ' '} "
     end,
 })
 
@@ -96,47 +79,47 @@ local modeNames = {
     ["t"] = "TERMINAL",
 }
 local modeHighlights = {
-    ["n"] = "StatuslineNormal",
-    ["v"] = "StatuslineVisual",
-    ["V"] = "StatuslineVisual",
-    [""]= "StatuslineVisual",
-    ["s"] = "StatuslineSelect",
-    ["S"] = "StatuslineSelect",
-    [""]= "StatuslineSelect",
-    ["i"] = "StatuslineInsert",
-    ["R"] = "StatuslineReplace",
-    ["c"] = "StatuslineCommand",
-    ["t"] = "StatuslineTerminal",
+    ["n"] = "StatusLineNormal",
+    ["v"] = "StatusLineVisual",
+    ["V"] = "StatusLineVisual",
+    [""]= "StatusLineVisual",
+    ["s"] = "StatusLineSelect",
+    ["S"] = "StatusLineSelect",
+    [""]= "StatusLineSelect",
+    ["i"] = "StatusLineInsert",
+    ["R"] = "StatusLineReplace",
+    ["c"] = "StatusLineCommand",
+    ["t"] = "StatusLineTerminal",
 }
 local modeBorderHighlights = {
-    ["n"] = "StatuslineBorderNormal",
-    ["v"] = "StatuslineBorderVisual",
-    ["V"] = "StatuslineBorderVisual",
-    [""]= "StatuslineBorderVisual",
-    ["s"] = "StatuslineBorderSelect",
-    ["S"] = "StatuslineBorderSelect",
-    [""]= "StatuslineBorderSelect",
-    ["i"] = "StatuslineBorderInsert",
-    ["R"] = "StatuslineBorderReplace",
-    ["c"] = "StatuslineBorderCommand",
-    ["t"] = "StatuslineBorderTerminal",
+    ["n"] = "StatusLineBorderNormal",
+    ["v"] = "StatusLineBorderVisual",
+    ["V"] = "StatusLineBorderVisual",
+    [""]= "StatusLineBorderVisual",
+    ["s"] = "StatusLineBorderSelect",
+    ["S"] = "StatusLineBorderSelect",
+    [""]= "StatusLineBorderSelect",
+    ["i"] = "StatusLineBorderInsert",
+    ["R"] = "StatusLineBorderReplace",
+    ["c"] = "StatusLineBorderCommand",
+    ["t"] = "StatusLineBorderTerminal",
 }
 vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
-        vim.api.nvim_set_hl(0, "StatuslineNormal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_2, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineVisual", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_4, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineSelect", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineInsert", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_3, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineReplace", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_1, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineCommand", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineTerminal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderNormal", { fg = vim.g.terminal_color_2, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderVisual", { fg = vim.g.terminal_color_4, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderSelect", { fg = vim.g.terminal_color_5, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderInsert", { fg = vim.g.terminal_color_3, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderReplace", { fg = vim.g.terminal_color_1, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderCommand", { fg = vim.g.terminal_color_6, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderTerminal", { fg = vim.g.terminal_color_6, })
+        vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_2, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_4, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_3, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_1, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderNormal", { fg = vim.g.terminal_color_2, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderVisual", { fg = vim.g.terminal_color_4, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderSelect", { fg = vim.g.terminal_color_5, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderInsert", { fg = vim.g.terminal_color_3, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_6, })
     end
 })
 MyStatusLine = function()
@@ -145,7 +128,7 @@ MyStatusLine = function()
     .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
     .."%#"..modeBorderHighlights[mode].."#"  -- Border for current mode
     .."%#StatusLine# %<%F "  -- File path
-    .."%#WarningMsg#%{&modified ? \" modified \" : \"\"}"  -- Show if file was modified
+    .."%#WarningMsg#%{&modified ? ' modified ' : ''}"  -- Show if file was modified
     .."%#StatusLine#%="  -- Spacing
     local count = vim.diagnostic.count()  -- Diagnostics count
     local signs = vim.diagnostic.config().signs.text
