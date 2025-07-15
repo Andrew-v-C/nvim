@@ -65,42 +65,18 @@ require("lazy").setup({
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
-        {  -- colorscheme kanagawa
-            "rebelot/kanagawa.nvim",
-            config = function()
-                vim.cmd("colorscheme kanagawa-wave")
-            end,
-        },
-        {  -- colorschemes to try
-            {
-                "catppuccin/nvim",
-            },
-            {
-                "folke/tokyonight.nvim",
-            },
-            {
-                "rose-pine/neovim",
-            },
-            {
-                "EdenEast/nightfox.nvim",
-            },
+        {  -- colorschemes
             {
                 "navarasu/onedark.nvim",
-            },
-            {
-                "sainnhe/gruvbox-material",
-            },
-            {
-                "projekt0n/github-nvim-theme",
-            },
-            {
-                "sainnhe/everforest",
+                config = function()
+                    vim.cmd("colorscheme onedark")
+                end
             },
         },
     },
     -- Configure any other settings here; see the documentation for more details
     -- Colorscheme that will be used when installing plugins
-    install = { colorscheme = { "default" } },
+    install = { colorscheme = { "onedark" } },
     -- Automatically check for plugin updates
     checker = { enabled = true },
 })

@@ -19,7 +19,9 @@ vim.opt.splitright = true  -- Open new windows to the right
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from treesitter
-    pattern = { "lua", "c", "cpp", "python", "java", "arduino", },  -- TODO: See if there's a cleaner way to do this
+    -- TODO: See if there's a cleaner way to do this;
+    -- pattern = { "*" } throws an error related to treesitter and blink.cmp
+    pattern = { "lua", "c", "cpp", "python", "java", "arduino", },
     callback = function() vim.treesitter.start() end,
 })
 
@@ -68,15 +70,14 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Configure diagnostics
-local signs = { "", "", "", "", }  -- Also used in status line
 vim.diagnostic.config({
     severity_sort = true,
     virtual_text = { severity = vim.diagnostic.severity.ERROR, },
     signs = { text = {
-        [vim.diagnostic.severity.ERROR] = signs[1],
-        [vim.diagnostic.severity.WARN] = signs[2],
-        [vim.diagnostic.severity.INFO] = signs[3],
-        [vim.diagnostic.severity.HINT] = signs[4],
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.INFO] = "",
+        [vim.diagnostic.severity.HINT] = "",
     }, },
 })
 
@@ -122,38 +123,20 @@ local modeBorderHighlights = {
 }
 vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
-        local termColors = {
-            ["black"] = vim.g.terminal_color_0,
-            ["red"] = vim.g.terminal_color_1,
-            ["green"] = vim.g.terminal_color_2,
-            ["yellow"] = vim.g.terminal_color_3,
-            ["blue"] = vim.g.terminal_color_4,
-            ["purple"] = vim.g.terminal_color_5,
-            ["cyan"] = vim.g.terminal_color_6,
-            ["white"] = vim.g.terminal_color_7,
-            ["bright black"] = vim.g.terminal_color_8,
-            ["bright red"] = vim.g.terminal_color_9,
-            ["bright green"] = vim.g.terminal_color_10,
-            ["bright yellow"] = vim.g.terminal_color_11,
-            ["bright blue"] = vim.g.terminal_color_12,
-            ["bright purple"] = vim.g.terminal_color_13,
-            ["bright cyan"] = vim.g.terminal_color_14,
-            ["bright white"] = vim.g.terminal_color_15,
-        }
-        vim.api.nvim_set_hl(0, "StatuslineNormal",   { fg = termColors["black"], bg = termColors["green"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineVisual",   { fg = termColors["black"], bg = termColors["blue"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineSelect",   { fg = termColors["black"], bg = termColors["purple"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineInsert",   { fg = termColors["black"], bg = termColors["yellow"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineReplace",  { fg = termColors["black"], bg = termColors["red"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineCommand",  { fg = termColors["black"], bg = termColors["cyan"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineTerminal", { fg = termColors["black"], bg = termColors["cyan"], bold = true, })
-        vim.api.nvim_set_hl(0, "StatuslineBorderNormal",   { fg = termColors["green"], })
-        vim.api.nvim_set_hl(0, "StatuslineBorderVisual",   { fg = termColors["blue"], })
-        vim.api.nvim_set_hl(0, "StatuslineBorderSelect",   { fg = termColors["purple"], })
-        vim.api.nvim_set_hl(0, "StatuslineBorderInsert",   { fg = termColors["yellow"], })
-        vim.api.nvim_set_hl(0, "StatuslineBorderReplace",  { fg = termColors["red"], })
-        vim.api.nvim_set_hl(0, "StatuslineBorderCommand",  { fg = termColors["cyan"], })
-        vim.api.nvim_set_hl(0, "StatuslineBorderTerminal", { fg = termColors["cyan"], })
+        vim.api.nvim_set_hl(0, "StatuslineNormal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_2, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineVisual", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_4, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineSelect", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineInsert", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_3, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineReplace", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_1, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineCommand", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineTerminal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderNormal", { fg = vim.g.terminal_color_2, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderVisual", { fg = vim.g.terminal_color_4, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderSelect", { fg = vim.g.terminal_color_5, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderInsert", { fg = vim.g.terminal_color_3, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderReplace", { fg = vim.g.terminal_color_1, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderCommand", { fg = vim.g.terminal_color_6, })
+        vim.api.nvim_set_hl(0, "StatuslineBorderTerminal", { fg = vim.g.terminal_color_6, })
     end
 })
 MyStatusLine = function()
@@ -162,20 +145,21 @@ MyStatusLine = function()
     .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
     .."%#"..modeBorderHighlights[mode].."#"  -- Border for current mode
     .."%#StatusLine# %<%F "  -- File path
-    .." %#WarningMsg#%{&modified ? \"modified\" : \"\"} "  -- Show if file was modified
+    .."%#WarningMsg#%{&modified ? \" modified \" : \"\"}"  -- Show if file was modified
     .."%#StatusLine#%="  -- Spacing
     local count = vim.diagnostic.count()  -- Diagnostics count
+    local signs = vim.diagnostic.config().signs.text
     if count[1] ~= nil then
-        output = output.."%#DiagnosticError# "..signs[1].." "..count[1].." "
+        output = output.."%#DiagnosticSignError# "..signs[1].." "..count[1].." "
     end
     if count[2] ~= nil then
-        output = output.."%#DiagnosticWarn# "..signs[2].." "..count[2].." "
+        output = output.."%#DiagnosticSignWarn# "..signs[2].." "..count[2].." "
     end
     if count[3] ~= nil then
-        output = output.."%#DiagnosticInfo# "..signs[3].." "..count[3].." "
+        output = output.."%#DiagnosticSignInfo# "..signs[3].." "..count[3].." "
     end
     if count[4] ~= nil then
-        output = output.."%#DiagnosticHint# "..signs[4].." "..count[4].." "
+        output = output.."%#DiagnosticSignHint# "..signs[4].." "..count[4].." "
     end
     return output
 end
