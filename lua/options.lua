@@ -112,14 +112,14 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_3, bold = true, })
         vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_1, bold = true, })
         vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_7, bold = true, })
         vim.api.nvim_set_hl(0, "StatusLineBorderNormal", { fg = vim.g.terminal_color_2, })
         vim.api.nvim_set_hl(0, "StatusLineBorderVisual", { fg = vim.g.terminal_color_4, })
         vim.api.nvim_set_hl(0, "StatusLineBorderSelect", { fg = vim.g.terminal_color_5, })
         vim.api.nvim_set_hl(0, "StatusLineBorderInsert", { fg = vim.g.terminal_color_3, })
         vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
         vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_6, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_7, })
     end
 })
 MyStatusLine = function()
@@ -158,6 +158,12 @@ vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+    command = "set cmdheight=1"
+})
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+    command = "set cmdheight=0"
+})
 
 -- Custom key mappings
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
