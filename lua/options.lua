@@ -5,7 +5,6 @@ vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true  -- Highlight current line
 vim.opt.scrolloff = 999  -- Set scrolling behaviour
 vim.opt.wrap = false  -- Disable word wrap
-vim.opt.linebreak = true -- Preserve words when wrapping text
 vim.opt.list = true  -- Show "list" characters
 vim.opt.listchars = {  -- Set "list" characters
     tab = '» ',
