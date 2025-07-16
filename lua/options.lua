@@ -5,6 +5,7 @@ vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true  -- Highlight current line
 vim.opt.scrolloff = 999  -- Set scrolling behaviour
 vim.opt.wrap = false  -- Disable word wrap
+vim.opt.linebreak = true -- Preserve words when wrapping text
 vim.opt.list = true  -- Show "list" characters
 vim.opt.listchars = {  -- Set "list" characters
     tab = '» ',
@@ -18,9 +19,9 @@ vim.opt.splitright = true  -- Open new windows to the right
 
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
-vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from treesitter
+vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from tree-sitter
     -- TODO: See if there's a cleaner way to do this;
-    -- pattern  = { "*" } throws an error from treesitter or blink.cmp
+    -- pattern  = { "*" } throws an error from tree-sitter or blink
     pattern = { "lua", "c", "cpp", "python", "java", "arduino" },
     callback = function() vim.treesitter.start() end,
 })
@@ -158,6 +159,10 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Misc.
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
+vim.opt.spell = true  -- Use spellcheck
+vim.api.nvim_create_autocmd("TermEnter", { callback = function()  -- Don't use spellcheck in terminal mode
+    vim.opt.spell = false
+end })
 vim.opt.autochdir = true  -- Change current working directory to match file
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
