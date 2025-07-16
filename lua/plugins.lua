@@ -28,11 +28,9 @@ require("lazy").setup({
         -- Add your plugins here
         {  -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
-            opts = {
-                lazy = false,
-                branch = "main",
-                build = ":TSUpdate",
-            },
+            branch = "master",  -- TODO: Change from master to main once bugs have been fixed
+            lazy = false,
+            build = ":TSUpdate",
         },
         {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
@@ -65,15 +63,15 @@ require("lazy").setup({
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
-        {  -- onedark colorscheme
+        {  -- onedark color scheme
             "navarasu/onedark.nvim",
             config = function()
                 vim.cmd("colorscheme onedark")
-            end
+            end,
         },
     },
     -- Configure any other settings here; see the documentation for more details
-    -- Colorscheme that will be used when installing plugins
+    -- Color scheme that will be used when installing plugins
     install = { colorscheme = { "onedark" } },
     -- Automatically check for plugin updates
     checker = { enabled = true },

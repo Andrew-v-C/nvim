@@ -15,12 +15,11 @@ vim.opt.listchars = {  -- Set "list" characters
 -- Windowing behaviour
 vim.opt.splitbelow = true  -- Open new windows below
 vim.opt.splitright = true  -- Open new windows to the right
-
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from tree-sitter
     -- TODO: See if there's a cleaner way to do this;
-    -- pattern  = { "*" } throws an error from tree-sitter or blink
+    -- pattern = { "*" } throws an error from tree-sitter or blink.cmp
     pattern = { "lua", "c", "cpp", "python", "java", "arduino" },
     callback = function() vim.treesitter.start() end,
 })
@@ -156,13 +155,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Misc.
+vim.opt.autochdir = true  -- Change current working directory to match file
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
-vim.opt.spell = true  -- Use spellcheck
-vim.api.nvim_create_autocmd("TermEnter", { callback = function()  -- Don't use spellcheck in terminal mode
-    vim.opt.spell = false
-end })
-vim.opt.autochdir = true  -- Change current working directory to match file
+vim.api.nvim_create_autocmd("TermEnter", { -- Don't use spellcheck in terminal mode
+    callback = function() vim.opt.spell = false end
+})
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
 vim.api.nvim_create_autocmd("CmdlineEnter", {
