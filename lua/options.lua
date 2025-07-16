@@ -171,5 +171,5 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 -- Custom key mappings / macros
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
 vim.keymap.set("n", "<Space>", "za")  -- Use Space to open/close folds
-vim.keymap.set("n", "<F12>", ":vert term<Enter>igit status<Enter>")  -- Enter terminal mode and show git status
+vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Enter terminal mode
 
