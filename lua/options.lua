@@ -45,9 +45,9 @@ vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
 vim.opt.fillchars = { fold = ' ' }
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Set fold expression from tree-sitter
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"  -- Set fold expression from tree-sitter
 
--- Configure status column
+-- Format status column
 MyStatusColumn = function()
     local output = " %s%l "
     if string.sub(vim.treesitter.foldexpr(), 1, 1) == ">" then
