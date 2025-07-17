@@ -28,9 +28,12 @@ require("lazy").setup({
         -- Add your plugins here
         {  -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
-            branch = "master",  -- TODO: Change from master to main once bugs have been fixed
+            branch = "main",
             lazy = false,
             build = ":TSUpdate",
+            opts = {
+                install_dir = vim.fn.stdpath("data").."/tree-sitter",
+            },
         },
         {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
