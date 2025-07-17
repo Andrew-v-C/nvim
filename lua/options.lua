@@ -15,12 +15,13 @@ vim.opt.listchars = {  -- Set "list" characters
 -- Windowing behaviour
 vim.opt.splitbelow = true  -- Open new windows below
 vim.opt.splitright = true  -- Open new windows to the right
+
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from tree-sitter
     -- TODO: See if there's a cleaner way to do this;
     -- pattern = { "*" } throws an error from tree-sitter or blink.cmp
-    pattern = { "lua", "c", "cpp", "python", "java", "arduino" },
+    pattern = { "lua", "c" },
     callback = function() vim.treesitter.start() end,
 })
 
@@ -44,14 +45,24 @@ vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "0"
 vim.opt.foldtext = ""
 vim.opt.fillchars = { fold = ' ' }
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "*" },
-    callback = function()
-        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        vim.opt.statuscolumn = " %s%l "  -- Configure status column
-        .."%{len(v:lua.vim.treesitter.foldexpr()) > 1 ? (foldclosed(v:lnum) == -1 ? '' : '') : ' '} "
-    end,
-})
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Set fold expression from tree-sitter
+
+-- Configure status column
+MyStatusColumn = function()
+    local output = " %s%l "
+    if string.sub(vim.treesitter.foldexpr(), 1, 1) == ">" then
+        if vim.fn.foldclosed(vim.v.lnum) == -1 then
+            output = output..""
+        else
+            output = output..""
+        end
+    else
+        output = output.." "
+    end
+    output = output.." "
+    return output
+end
+vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
 
 -- Configure diagnostics
 vim.diagnostic.config({
@@ -147,12 +158,7 @@ MyStatusLine = function()
     end
     return output
 end
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "*" },
-    callback = function()
-        vim.opt.statusline = "%!v:lua.MyStatusLine()"
-    end,
-})
+vim.opt.statusline = "%!v:lua.MyStatusLine()"
 
 -- Misc.
 vim.opt.autochdir = true  -- Change current working directory to match file
@@ -163,12 +169,8 @@ vim.api.nvim_create_autocmd("TermEnter", { -- Don't use spellcheck in terminal m
 })
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
-vim.api.nvim_create_autocmd("CmdlineEnter", {
-    command = "set cmdheight=1"
-})
-vim.api.nvim_create_autocmd("CmdlineLeave", {
-    command = "set cmdheight=0"
-})
+vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" })
+vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 
 -- Custom key mappings / macros
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
