@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from tree-sitt
         if vim.treesitter.language.add(lang) then
             vim.treesitter.start()
         end
-    end,
+    end
 })
 
 -- Set tabs/indentation
@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.softtabstop = 4
         vim.opt.cindent = true
         vim.opt.formatoptions = ""
-    end,
+    end
 })
 
 -- Set up folding
@@ -142,7 +142,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
         vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
         vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_7, })
-    end,
+    end
 })
 MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
@@ -175,6 +175,11 @@ vim.opt.guicursor = "n-v-c-sm:block,"
 .."i-ci-ve:ver25,"
 .."r-cr-o:hor20,"
 .."t:ver25-blinkon500-blinkoff500-TermCursor"
+vim.api.nvim_create_autocmd("VimLeave", {  -- Revert cursor on exiting Neovim
+    callback = function()
+        vim.opt.guicursor = "a:ver25-blinkon500-blinkoff500-TermCursor"
+    end
+})
 
 -- Misc.
 vim.opt.autochdir = true  -- Change current working directory to match file
@@ -188,7 +193,6 @@ vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 
 -- Custom key mappings / macros
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
-vim.keymap.set("n", "<Space>", "za")  -- Use Space to open/close folds
 vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
 vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")  -- Make switching from terminal window easier
 

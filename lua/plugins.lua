@@ -1,8 +1,8 @@
 
 --[[ TODO
      - Change from Lazy to built-in plugin manager
-     - Add plugin for auto-closing brackets
-     - See if all LSP plugins are still necessary
+     - Add plugin for auto-closing brackets (and auto-indenting on <CR>?)
+     - Configure language servers better; see if all plugins are still necessary
 ]]
 
 -- Bootstrap lazy.nvim
