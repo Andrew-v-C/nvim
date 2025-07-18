@@ -1,4 +1,9 @@
 
+--[[ TODO
+    - Manage autocommands better
+    - Make status line and column cleaner when switching between windows
+]]
+
 -- Lines and scrolling
 vim.opt.number = true  -- Show line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers
@@ -10,6 +15,8 @@ vim.opt.listchars = {  -- Set "list" characters
     tab = '» ',
     trail = '·',
     nbsp = '␣',
+    extends = '…',
+    precedes = '…',
 }
 
 -- Windowing behaviour
@@ -135,16 +142,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
         vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
         vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_7, })
-    end
+    end,
 })
 MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
     local output = ""
     .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
     .."%#"..modeBorderHighlights[mode].."#"  -- Border for current mode
-    .."%#StatusLine# %<%F "  -- File path
-    .."%#WarningMsg#%{&modified ? '[+]' : ''}"  -- Show if file was modified
-    .."%#StatusLine#%="  -- Spacing
+    .."%## %<%F "  -- File path
+    .."%#WarningMsg#%{&modified ? ' ' : ''}"  -- Show if file was modified
+    .."%##%="  -- Spacing
     local count = vim.diagnostic.count()  -- Diagnostics count
     local signs = vim.diagnostic.config().signs.text
     if count[1] ~= nil then
@@ -163,6 +170,12 @@ MyStatusLine = function()
 end
 vim.opt.statusline = "%!v:lua.MyStatusLine()"
 
+-- Set cursor style for each mode
+vim.opt.guicursor = "n-v-c-sm:block,"
+.."i-ci-ve:ver25,"
+.."r-cr-o:hor20,"
+.."t:ver25-blinkon500-blinkoff500-TermCursor"
+
 -- Misc.
 vim.opt.autochdir = true  -- Change current working directory to match file
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
@@ -176,5 +189,6 @@ vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 -- Custom key mappings / macros
 vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
 vim.keymap.set("n", "<Space>", "za")  -- Use Space to open/close folds
-vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Enter terminal mode
+vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
+vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")  -- Make switching from terminal window easier
 
