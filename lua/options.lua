@@ -187,7 +187,6 @@ vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" })
 vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 
 -- Custom key mappings / macros
-vim.keymap.set("i", "{<Enter>", "{<Enter>}<Esc>O")  -- Auto-close braces for blocks
 vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
 vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")  -- Make switching from terminal window easier
 

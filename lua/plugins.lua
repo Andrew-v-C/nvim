@@ -59,6 +59,11 @@ require("lazy").setup({
             },
             opts_extend = { "sources.default" },
         },
+        {  -- nvim-autopairs
+            "windwp/nvim-autopairs",
+            event = "InsertEnter",
+            config = true,
+        },
         {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
