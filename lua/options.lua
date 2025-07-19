@@ -20,28 +20,6 @@ vim.opt.splitright = true  -- Open new windows to the right
 
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
-vim.api.nvim_create_autocmd("FileType", {  -- Enable highlighting from tree-sitter
-    pattern = { "*" },
-    callback = function(type)
-        local lang = vim.treesitter.language.get_lang(type.match)
-        if vim.treesitter.language.add(lang) then
-            vim.treesitter.start()
-        end
-    end
-})
-
--- Set tabs/indentation
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "*" },
-    callback = function()
-        vim.opt.expandtab = true
-        vim.opt.shiftwidth = 4
-        vim.opt.tabstop = 4
-        vim.opt.softtabstop = 4
-        vim.opt.cindent = true
-        vim.opt.formatoptions = ""
-    end
-})
 
 -- Set up folding
 vim.opt.foldenable = true
@@ -81,7 +59,7 @@ vim.diagnostic.config({
     }, },
 })
 
--- Format status line
+-- Format status line (highlight groups are set in autocommands)
 local modeNames = {
     ["n"] = "NORMAL",
     ["v"] = "VISUAL",
@@ -121,24 +99,6 @@ local modeBorderHighlights = {
     ["c"] = "StatusLineBorderCommand",
     ["t"] = "StatusLineBorderTerminal",
 }
-vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-        vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_2, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_4, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_3, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_1, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_7, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderNormal", { fg = vim.g.terminal_color_2, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderVisual", { fg = vim.g.terminal_color_4, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderSelect", { fg = vim.g.terminal_color_5, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderInsert", { fg = vim.g.terminal_color_3, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_7, })
-    end
-})
 MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
     local output = ""
@@ -170,21 +130,13 @@ vim.opt.guicursor = "n-v-c-sm:block,"
 .."i-ci-ve:ver25,"
 .."r-cr-o:hor20,"
 .."t:ver25-blinkon500-blinkoff500-TermCursor"
-vim.api.nvim_create_autocmd("VimLeave", {  -- Revert cursor on exiting Neovim
-    callback = function()
-        vim.opt.guicursor = "a:ver25-blinkon500-blinkoff500-TermCursor"
-    end
-})
 
 -- Misc.
 vim.opt.autochdir = true  -- Change current working directory to match file
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
-vim.api.nvim_create_autocmd("TermEnter", { command = "set nospell" })  -- Don't use spellcheck in terminal mode
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
-vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" })
-vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 
 -- Custom key mappings / macros
 vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
