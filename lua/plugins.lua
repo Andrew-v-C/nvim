@@ -1,10 +1,4 @@
 
---[[ TODO
-     - Change from Lazy to built-in plugin manager
-     - Add plugin for auto-closing brackets (and auto-indenting on <CR>?)
-     - Configure language servers better; see if all plugins are still necessary
-]]
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -43,12 +37,10 @@ require("lazy").setup({
         },
         {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
+            opts = {},
             dependencies = {
-                "neovim/nvim-lspconfig",
                 { "mason-org/mason.nvim", opts = {} },
-            },
-            opts = {
-                ensure_installed = { "lua_ls", "clangd", },
+                "neovim/nvim-lspconfig",
             },
         },
         {  -- blink.cmp

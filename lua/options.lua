@@ -1,9 +1,4 @@
 
---[[ TODO
-    - Manage autocommands better
-    - Make status line and column cleaner when switching between windows
-]]
-
 -- Lines and scrolling
 vim.opt.number = true  -- Show line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers
