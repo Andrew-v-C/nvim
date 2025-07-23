@@ -61,7 +61,7 @@ require("lazy").setup({
             },
             opts_extend = { "sources.default" },
         },
-        {
+        {  -- nvim-ufo
             "kevinhwang91/nvim-ufo",
             dependencies = { "kevinhwang91/promise-async", },
             opts = {
@@ -80,7 +80,7 @@ require("lazy").setup({
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
-        {  -- onedark color scheme
+        {  -- color scheme
             "navarasu/onedark.nvim",
             config = function()
                 vim.cmd("colorscheme onedark")
@@ -89,7 +89,7 @@ require("lazy").setup({
     },
     -- Configure any other settings here; see the documentation for more details
     -- Color scheme that will be used when installing plugins
-    install = { colorscheme = { "onedark" } },
+    install = { colorscheme = { "default" } },
     -- Automatically check for plugin updates
     checker = { enabled = true },
 })

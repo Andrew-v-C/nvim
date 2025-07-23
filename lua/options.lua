@@ -25,17 +25,20 @@ vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt.foldcolumn = "0"
+vim.opt.foldcolumn = "1"
+vim.opt.fillchars = {
+    fold = ' ',
+    foldopen = '',
+    foldclose = '',
+    foldsep = ' ',
+}
 
 -- Format status column
+vim.opt.numberwidth = 3
 MyStatusColumn = function()
     local output = " %s%l "
     if string.sub(vim.treesitter.foldexpr(), 1, 1) == ">" then
-        if vim.fn.foldclosed(vim.v.lnum) == -1 then
-            output = output..""
-        else
-            output = output..""
-        end
+        output = output.."%C"
     else
         output = output.." "
     end
@@ -107,16 +110,16 @@ MyStatusLine = function()
     local count = vim.diagnostic.count()  -- Diagnostics count
     local signs = vim.diagnostic.config().signs.text
     if count[1] ~= nil then
-        output = output.."%#DiagnosticSignError# "..signs[1].." "..count[1].." "
+        output = output.."%#DiagnosticError# "..signs[1].." "..count[1].." "
     end
     if count[2] ~= nil then
-        output = output.."%#DiagnosticSignWarn# "..signs[2].." "..count[2].." "
+        output = output.."%#DiagnosticWarn# "..signs[2].." "..count[2].." "
     end
     if count[3] ~= nil then
-        output = output.."%#DiagnosticSignInfo# "..signs[3].." "..count[3].." "
+        output = output.."%#DiagnosticInfo# "..signs[3].." "..count[3].." "
     end
     if count[4] ~= nil then
-        output = output.."%#DiagnosticSignHint# "..signs[4].." "..count[4].." "
+        output = output.."%#DiagnosticHint# "..signs[4].." "..count[4].." "
     end
     return output
 end

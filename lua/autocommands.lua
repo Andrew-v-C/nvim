@@ -25,6 +25,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
+        -- Set highlight groups for fold column
+        vim.api.nvim_set_hl(0, "FoldColumn", { link = "LineNr" })
+        vim.api.nvim_set_hl(0, "CursorLineFold", { link = "CursorLineNr" })
         -- Set highlight groups for status line
         vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_2, bold = true, })
         vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_4, bold = true, })
