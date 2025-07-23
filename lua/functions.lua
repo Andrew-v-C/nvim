@@ -1,7 +1,7 @@
 
 -- Generate palette for Ptyxis terminal
 GeneratePalette = function()
-    local filename = "/home/andrew/.local/share/org.gnome.Ptyxis/palettes/0-Neovim.palette"
+    local filename = vim.env.HOME.."/.local/share/org.gnome.Ptyxis/palettes/0-Neovim.palette"
     local palette = io.open(filename, "w")
     if palette ~= nil then
         local background = "#"..string.format("%x", vim.api.nvim_get_hl(0, { name = "Normal" }).bg)
