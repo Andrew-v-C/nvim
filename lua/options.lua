@@ -23,12 +23,9 @@ vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 
 -- Set up folding
 vim.opt.foldenable = true
-vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 vim.opt.foldcolumn = "0"
-vim.opt.foldtext = ""
-vim.opt.fillchars = { fold = ' ' }
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"  -- Set fold expression from tree-sitter
 
 -- Format status column
 MyStatusColumn = function()

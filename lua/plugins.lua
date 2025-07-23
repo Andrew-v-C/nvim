@@ -37,10 +37,12 @@ require("lazy").setup({
         },
         {  -- mason-lspconfig
             "mason-org/mason-lspconfig.nvim",
-            opts = {},
             dependencies = {
                 { "mason-org/mason.nvim", opts = {} },
                 "neovim/nvim-lspconfig",
+            },
+            opts = {
+                ensure_installed = { "lua_ls", "clangd", }
             },
         },
         {  -- blink.cmp
@@ -58,6 +60,15 @@ require("lazy").setup({
                 fuzzy = { implementation = "prefer_rust_with_warning", },
             },
             opts_extend = { "sources.default" },
+        },
+        {
+            "kevinhwang91/nvim-ufo",
+            dependencies = { "kevinhwang91/promise-async", },
+            opts = {
+                provider_selector = function(bufnr, filetype, buftype)
+                    return { "treesitter", "indent" }
+                end,
+            },
         },
         {  -- nvim-autopairs
             "windwp/nvim-autopairs",

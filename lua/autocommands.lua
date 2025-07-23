@@ -12,9 +12,15 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.shiftwidth = 4
         vim.opt.tabstop = 4
         vim.opt.softtabstop = 4
-        vim.opt.cindent = true
         vim.opt.formatoptions = ""
+        vim.opt.cindent = true
     end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "text" },
+    -- Automatically enable spellcheck for certain file types
+    command = "set spell"
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
