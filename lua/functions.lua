@@ -1,4 +1,5 @@
 
+-- Generate palette for Ptyxis terminal
 GeneratePalette = function()
     local filename = "/home/andrew/.local/share/org.gnome.Ptyxis/palettes/0-Neovim.palette"
     local palette = io.open(filename, "w")
