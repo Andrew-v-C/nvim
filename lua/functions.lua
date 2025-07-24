@@ -1,9 +1,9 @@
 
 -- Colors used to generate terminal scheme
 local colors = {
-    ["background"] = "#"..string.format("%x", vim.api.nvim_get_hl(0, { name = "Normal" }).bg),
-    ["foreground"] = "#"..string.format("%x", vim.api.nvim_get_hl(0, { name = "Normal" }).fg),
-    ["cursor"] = "#"..string.format("%x", vim.api.nvim_get_hl(0, { name = "Normal" }).fg),
+    ["background"] = "#"..string.format("%06x", vim.api.nvim_get_hl(0, { name = "Normal" }).bg),
+    ["foreground"] = "#"..string.format("%06x", vim.api.nvim_get_hl(0, { name = "Normal" }).fg),
+    ["cursor"] = "#"..string.format("%06x", vim.api.nvim_get_hl(0, { name = "Normal" }).fg),
     ["black"] = vim.g.terminal_color_0,
     ["red"] = vim.g.terminal_color_1,
     ["green"] = vim.g.terminal_color_2,
