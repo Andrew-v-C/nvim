@@ -59,29 +59,36 @@ end
 
 -- Generate scheme for Windows Terminal
 GenerateScheme = function()
-    local output = ""
-    .."{\n"
-    .."    \"name\" : \"Neovim\",\n"
-    .."    \"background\" : \""..colors["background"].."\",\n"
-    .."    \"foreground\" : \""..colors["foreground"].."\",\n"
-    .."    \"cursorColor\": \""..colors["cursor"].."\",\n"
-    .."    \"black\" : \""..colors["black"].."\",\n"
-    .."    \"red\" : \""..colors["red"].."\",\n"
-    .."    \"green\" : \""..colors["green"].."\",\n"
-    .."    \"yellow\" : \""..colors["yellow"].."\",\n"
-    .."    \"blue\" : \""..colors["blue"].."\",\n"
-    .."    \"purple\" : \""..colors["purple"].."\",\n"
-    .."    \"cyan\" : \""..colors["cyan"].."\",\n"
-    .."    \"white\" : \""..colors["white"].."\",\n"
-    .."    \"brightBlack\" : \""..colors["brightBlack"].."\",\n"
-    .."    \"brightRed\" : \""..colors["brightRed"].."\",\n"
-    .."    \"brightGreen\" : \""..colors["brightGreen"].."\",\n"
-    .."    \"brightYellow\" : \""..colors["brightYellow"].."\",\n"
-    .."    \"brightBlue\" : \""..colors["brightBlue"].."\",\n"
-    .."    \"brightPurple\" : \""..colors["brightPurple"].."\",\n"
-    .."    \"brightCyan\" : \""..colors["brightCyan"].."\",\n"
-    .."    \"brightWhite\" : \""..colors["brightWhite"].."\",\n"
-    .."},"
-    print(output)
+    local clipboard = io.popen("clip", "w")
+    if clipboard ~= nil then
+        local output = ""
+        .."{\n"
+        .."    \"name\" : \"Neovim\",\n"
+        .."    \"background\" : \""..colors["background"].."\",\n"
+        .."    \"foreground\" : \""..colors["foreground"].."\",\n"
+        .."    \"cursorColor\" : \""..colors["cursor"].."\",\n"
+        .."    \"black\" : \""..colors["black"].."\",\n"
+        .."    \"red\" : \""..colors["red"].."\",\n"
+        .."    \"green\" : \""..colors["green"].."\",\n"
+        .."    \"yellow\" : \""..colors["yellow"].."\",\n"
+        .."    \"blue\" : \""..colors["blue"].."\",\n"
+        .."    \"purple\" : \""..colors["purple"].."\",\n"
+        .."    \"cyan\" : \""..colors["cyan"].."\",\n"
+        .."    \"white\" : \""..colors["white"].."\",\n"
+        .."    \"brightBlack\" : \""..colors["brightBlack"].."\",\n"
+        .."    \"brightRed\" : \""..colors["brightRed"].."\",\n"
+        .."    \"brightGreen\" : \""..colors["brightGreen"].."\",\n"
+        .."    \"brightYellow\" : \""..colors["brightYellow"].."\",\n"
+        .."    \"brightBlue\" : \""..colors["brightBlue"].."\",\n"
+        .."    \"brightPurple\" : \""..colors["brightPurple"].."\",\n"
+        .."    \"brightCyan\" : \""..colors["brightCyan"].."\",\n"
+        .."    \"brightWhite\" : \""..colors["brightWhite"].."\"\n"
+        .."}"
+        clipboard:write(output)
+        clipboard:close()
+        print("Scheme copied to clipboard")
+    else
+        print("Failed to generate scheme")
+    end
 end
 
