@@ -23,6 +23,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
+local colorscheme = require("colorscheme")
 require("lazy").setup({
     spec = {
         -- Add your plugins here
@@ -81,9 +82,9 @@ require("lazy").setup({
             opts = { indent = { char = '▏' }, },
         },
         {  -- color scheme
-            "navarasu/onedark.nvim",
+            colorscheme.path,
             config = function()
-                vim.cmd("colorscheme onedark")
+                vim.cmd("colorscheme "..colorscheme.name)
             end,
         },
     },
