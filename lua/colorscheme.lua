@@ -1,6 +1,6 @@
 
 return {
-    path = "navarasu/onedark.nvim",
-    name = "onedark",
+    path = "EdenEast/nightfox.nvim",
+    name = "nightfox",
 }
 
