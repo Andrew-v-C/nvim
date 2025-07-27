@@ -47,18 +47,6 @@ MyStatusColumn = function()
 end
 vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
 
--- Configure diagnostics
-vim.diagnostic.config({
-    severity_sort = true,
-    virtual_text = { severity = vim.diagnostic.severity.ERROR, },
-    signs = { text = {
-        [vim.diagnostic.severity.ERROR] = "",
-        [vim.diagnostic.severity.WARN] = "",
-        [vim.diagnostic.severity.INFO] = "",
-        [vim.diagnostic.severity.HINT] = "",
-    }, },
-})
-
 -- Format status line (highlight groups are set in autocommands)
 local modeNames = {
     ["n"] = "NORMAL",

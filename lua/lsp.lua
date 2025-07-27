@@ -1,38 +1,24 @@
 
-vim.lsp.config["lua-language-server"] = {
-    cmd = { "lua-language-server" },
-    filetypes = { "lua" },
-    root_markers = { ".git" },
-    settings = { Lua = { diagnostics = { globals = { "vim" } } } },
-}
-vim.lsp.enable("lua-language-server")
+-- Include lsp directory in path
+package.path = package.path..";"..vim.fn.stdpath("config").."/lsp/?.lua"
 
-vim.lsp.config["clangd"] = {
-    cmd = { "clangd" },
-    filetypes = { "c", "cpp" },
-    root_markers = { ".git" },
-}
-vim.lsp.enable("clangd")
-
-local cliConfigPath
-if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
-    cliConfigPath = vim.fn.expand("~/AppData/Local/Arduino15/arduino-cli.yaml")
-else
-    cliConfigPath = vim.fn.expand("~/.arduino15/arduino-cli.yaml")
+-- Load configs and enable servers
+local server
+for key, value in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+    server = vim.fn.fnamemodify(value, ":t:r")
+    vim.lsp.config[server] = require(server)
+    vim.lsp.enable(server)
 end
-vim.lsp.config["arduino-language-server"] = {
-    capabilities = {
-        textDocument = { semanticTokens = vim.NIL, },
-        workspace = { semanticTokens = vim.NIL, },
-    },
-    cmd = {
-        "arduino-language-server",
-        "-cli-config", cliConfigPath
-    },
-    filetypes = { "arduino" },
-    root_dir = function(bufnr, on_dir)
-        on_dir(vim.fn.expand "%:p:h")
-    end,
-}
-vim.lsp.enable("arduino-language-server")
+
+-- Configure diagnostics
+vim.diagnostic.config({
+    severity_sort = true,
+    virtual_text = { severity = vim.diagnostic.severity.ERROR, },
+    signs = { text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.INFO] = "",
+        [vim.diagnostic.severity.HINT] = "",
+    }, },
+})
 
