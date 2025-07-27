@@ -22,7 +22,6 @@ vim.lsp.config["arduino-language-server"] = {
     cmd = {
         "arduino-language-server",
         "-cli-config", vim.fn.expand("~/AppData/Local/Arduino15/arduino-cli.yaml"),
-        "-fqbn", "arduino:avr:pro",
     },
     filetypes = { "arduino" },
     root_dir = function(bufnr, on_dir)
