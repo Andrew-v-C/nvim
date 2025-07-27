@@ -36,16 +36,6 @@ require("lazy").setup({
                 install_dir = vim.fn.stdpath("data").."/tree-sitter",
             },
         },
-        {  -- mason-lspconfig
-            "mason-org/mason-lspconfig.nvim",
-            dependencies = {
-                { "mason-org/mason.nvim", opts = {} },
-                "neovim/nvim-lspconfig",
-            },
-            opts = {
-                ensure_installed = { "lua_ls", "clangd", }
-            },
-        },
         {  -- blink.cmp
             "Saghen/blink.cmp",
             -- dependencies = { "rafamadriz/friendly-snippets" },
@@ -62,6 +52,11 @@ require("lazy").setup({
             },
             opts_extend = { "sources.default" },
         },
+        {  -- nvim-autopairs
+            "windwp/nvim-autopairs",
+            event = "InsertEnter",
+            config = true,
+        },
         {  -- nvim-ufo
             "kevinhwang91/nvim-ufo",
             dependencies = { "kevinhwang91/promise-async", },
@@ -70,11 +65,6 @@ require("lazy").setup({
                     return { "treesitter", "indent" }
                 end,
             },
-        },
-        {  -- nvim-autopairs
-            "windwp/nvim-autopairs",
-            event = "InsertEnter",
-            config = true,
         },
         {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
@@ -93,13 +83,6 @@ require("lazy").setup({
     install = { colorscheme = { "default" } },
     -- Automatically check for plugin updates
     checker = { enabled = true },
-})
-
--- Add "vim" to global variables for lua_ls
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = { diagnostics = { globals = { "vim", }, }, },
-    },
 })
 
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
