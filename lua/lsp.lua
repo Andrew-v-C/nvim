@@ -14,6 +14,12 @@ vim.lsp.config["clangd"] = {
 }
 vim.lsp.enable("clangd")
 
+local cliConfigPath
+if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
+    cliConfigPath = vim.fn.expand("~/AppData/Local/Arduino15/arduino-cli.yaml")
+else
+    cliConfigPath = vim.fn.expand("~/.arduino15/arduino-cli.yaml")
+end
 vim.lsp.config["arduino-language-server"] = {
     capabilities = {
         textDocument = { semanticTokens = vim.NIL, },
@@ -21,7 +27,7 @@ vim.lsp.config["arduino-language-server"] = {
     },
     cmd = {
         "arduino-language-server",
-        "-cli-config", vim.fn.expand("~/AppData/Local/Arduino15/arduino-cli.yaml"),
+        "-cli-config", cliConfigPath
     },
     filetypes = { "arduino" },
     root_dir = function(bufnr, on_dir)

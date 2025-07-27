@@ -138,6 +138,15 @@ vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
 
+-- Set shell to use in terminal mode
+local shell
+if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
+    shell = "pwsh"
+else
+    shell = "bash"
+end
+vim.opt.shell = shell
+
 -- Custom key mappings / macros
 vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
 vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")  -- Make switching from terminal window easier
