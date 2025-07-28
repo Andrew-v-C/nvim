@@ -137,5 +137,5 @@ vim.opt.shell = shell
 
 -- Custom key mappings / macros
 vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
-vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")  -- Make switching from terminal window easier
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")  -- Make Esc behave the same in terminal mode
 
