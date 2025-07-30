@@ -17,7 +17,7 @@ return {
     },
     filetypes = { "arduino" },
     root_dir = function(bufnr, on_dir)
-        on_dir(vim.fn.expand "%:p:h")
+        on_dir(vim.fn.expand("%:p:h"))
     end,
 }
 
