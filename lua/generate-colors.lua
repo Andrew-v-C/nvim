@@ -66,9 +66,13 @@ local generateWindowsTerminalScheme = function()
 end
 
 local generatePuTTYColors = function()
-    local clipboard = io.popen("clip", "w")
-    if clipboard ~= nil then
+    local filename = vim.fn.expand("~/Downloads/Neovim.reg")
+    local file = io.open(filename, "w")
+    if file ~= nil then
         local output = ""
+        .."Windows Registry Editor Version 5.00\n"
+        .."\n"
+        .."[HKEY_CURRENT_USER\\Software\\SimonTatham\\PuTTY\\Sessions\\Default%20Settings]\n"
         .."\"Colour0\"=\""..hexToRGB(colors["foreground"]).."\"\n"
         .."\"Colour1\"=\""..hexToRGB(colors["foreground"]).."\"\n"
         .."\"Colour2\"=\""..hexToRGB(colors["background"]).."\"\n"
@@ -91,16 +95,16 @@ local generatePuTTYColors = function()
         .."\"Colour19\"=\""..hexToRGB(colors["brightCyan"]).."\"\n"
         .."\"Colour20\"=\""..hexToRGB(colors["white"]).."\"\n"
         .."\"Colour21\"=\""..hexToRGB(colors["brightWhite"]).."\""
-        clipboard:write(output)
-        clipboard:close()
-        print("Colors copied to clipboard")
+        file:write(output)
+        file:close()
+        print("\""..filename.."\" was saved")
     else
         print("Failed to generate colors")
     end
 end
 
 local generatePtyxisPalette = function()
-    local filename = vim.env.HOME.."/.local/share/org.gnome.Ptyxis/palettes/Neovim.palette"
+    local filename = vim.fn.expand("~/.local/share/org.gnome.Ptyxis/palettes/Neovim.palette")
     local file = io.open(filename, "w")
     if file ~= nil then
         local output = ""
