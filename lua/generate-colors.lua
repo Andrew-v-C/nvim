@@ -31,42 +31,8 @@ local hexToRGB = function(hexval)
     return red..","..green..","..blue
 end
 
-local generateWindowsTerminalScheme = function()
-    local clipboard = io.popen("clip", "w")
-    if clipboard ~= nil then
-        local output = ""
-        .."{\n"
-        .."    \"name\" : \"Neovim\",\n"
-        .."    \"background\" : \""..colors["background"].."\",\n"
-        .."    \"foreground\" : \""..colors["foreground"].."\",\n"
-        .."    \"cursorColor\" : \""..colors["cursor"].."\",\n"
-        .."    \"black\" : \""..colors["black"].."\",\n"
-        .."    \"red\" : \""..colors["red"].."\",\n"
-        .."    \"green\" : \""..colors["green"].."\",\n"
-        .."    \"yellow\" : \""..colors["yellow"].."\",\n"
-        .."    \"blue\" : \""..colors["blue"].."\",\n"
-        .."    \"purple\" : \""..colors["purple"].."\",\n"
-        .."    \"cyan\" : \""..colors["cyan"].."\",\n"
-        .."    \"white\" : \""..colors["white"].."\",\n"
-        .."    \"brightBlack\" : \""..colors["brightBlack"].."\",\n"
-        .."    \"brightRed\" : \""..colors["brightRed"].."\",\n"
-        .."    \"brightGreen\" : \""..colors["brightGreen"].."\",\n"
-        .."    \"brightYellow\" : \""..colors["brightYellow"].."\",\n"
-        .."    \"brightBlue\" : \""..colors["brightBlue"].."\",\n"
-        .."    \"brightPurple\" : \""..colors["brightPurple"].."\",\n"
-        .."    \"brightCyan\" : \""..colors["brightCyan"].."\",\n"
-        .."    \"brightWhite\" : \""..colors["brightWhite"].."\"\n"
-        .."}"
-        clipboard:write(output)
-        clipboard:close()
-        print("Scheme copied to clipboard")
-    else
-        print("Failed to generate scheme")
-    end
-end
-
-local generatePuTTYColors = function()
-    local filename = vim.fn.expand("~/Downloads/Neovim.reg")
+local generateColors_PuTTY = function()
+    local filename = vim.fn.expand("~/Downloads/Neovim_PuTTY_colours.reg")
     local file = io.open(filename, "w")
     if file ~= nil then
         local output = ""
@@ -99,51 +65,13 @@ local generatePuTTYColors = function()
         file:close()
         print("\""..filename.."\" was saved")
     else
-        print("Failed to generate colors")
-    end
-end
-
-local generatePtyxisPalette = function()
-    local filename = vim.fn.expand("~/.local/share/org.gnome.Ptyxis/palettes/Neovim.palette")
-    local file = io.open(filename, "w")
-    if file ~= nil then
-        local output = ""
-        .."[Palette]\n"
-        .."Name=Neovim\n"
-        .."Background="..colors["background"].."\n"
-        .."Foreground="..colors["foreground"].."\n"
-        .."Cursor="..colors["cursor"].."\n"
-        .."Color0="..colors["black"].."\n"
-        .."Color1="..colors["red"].."\n"
-        .."Color2="..colors["green"].."\n"
-        .."Color3="..colors["yellow"].."\n"
-        .."Color4="..colors["blue"].."\n"
-        .."Color5="..colors["purple"].."\n"
-        .."Color6="..colors["cyan"].."\n"
-        .."Color7="..colors["white"].."\n"
-        .."Color8="..colors["brightBlack"].."\n"
-        .."Color9="..colors["brightRed"].."\n"
-        .."Color10="..colors["brightGreen"].."\n"
-        .."Color11="..colors["brightYellow"].."\n"
-        .."Color12="..colors["brightBlue"].."\n"
-        .."Color13="..colors["brightPurple"].."\n"
-        .."Color14="..colors["brightCyan"].."\n"
-        .."Color15="..colors["brightWhite"]
-        file:write(output)
-        file:close()
-        print("\""..filename.."\" was saved")
-    else
-        print("Failed to generate palette")
+        print("Failed to generate PuTTY colours")
     end
 end
 
 GenerateColors = function(terminal)
-    if terminal == "Windows Terminal" then
-        generateWindowsTerminalScheme()
-    elseif terminal == "PuTTY" then
-        generatePuTTYColors()
-    elseif terminal == "Ptyxis" then
-        generatePtyxisPalette()
+    if terminal == "PuTTY" then
+        generateColors_PuTTY()
     else
         print("Terminal option not found")
     end
