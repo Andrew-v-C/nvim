@@ -128,7 +128,7 @@ vim.opt.cmdheight = 0 -- Hide command line by default
 -- Set shell to use in terminal mode
 local shell
 if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
-    shell = "pwsh"
+    shell = "pwsh -NoLogo"
 else
     shell = "bash"
 end
