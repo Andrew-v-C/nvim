@@ -1,7 +1,6 @@
 
 -- Lines and scrolling
 vim.opt.number = true  -- Show line numbers
--- vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true  -- Highlight current line
 vim.opt.scrolloff = 999  -- Set scrolling behaviour
 vim.opt.wrap = false  -- Disable word wrap
