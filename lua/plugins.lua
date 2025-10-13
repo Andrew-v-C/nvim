@@ -54,15 +54,6 @@ require("lazy").setup({
             event = "InsertEnter",
             config = true,
         },
-        {  -- nvim-ufo
-            "kevinhwang91/nvim-ufo",
-            dependencies = { "kevinhwang91/promise-async", },
-            opts = {
-                provider_selector = function(bufnr, filetype, buftype)
-                    return { "treesitter", "indent" }
-                end,
-            },
-        },
         {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
@@ -81,7 +72,4 @@ require("lazy").setup({
     -- Automatically check for plugin updates
     checker = { enabled = true },
 })
-
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 

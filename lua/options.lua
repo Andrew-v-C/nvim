@@ -20,29 +20,13 @@ vim.opt.splitright = true  -- Open new windows to the right
 -- Colors and highlighting
 vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 
--- Set up folding
-vim.opt.foldenable = true
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldcolumn = "1"
-vim.opt.fillchars = {
-    fold = ' ',
-    foldopen = '',
-    foldclose = '',
-    foldsep = ' ',
-}
+-- (Don't) set up folding
+vim.opt.foldenable = false
 
 -- Format status column
 vim.opt.numberwidth = 3
 MyStatusColumn = function()
-    local output = " %s%l "
-    if string.sub(vim.treesitter.foldexpr(), 1, 1) == ">" then
-        output = output.."%C"
-    else
-        output = output.." "
-    end
-    output = output.." "
-    return output
+    return " %s%l  "
 end
 vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
 
