@@ -27,6 +27,12 @@ local colorscheme = require("colorscheme")
 require("lazy").setup({
     spec = {
         -- Add your plugins here
+        {  -- color scheme
+            colorscheme.path,
+            config = function()
+                vim.cmd("colorscheme "..colorscheme.name)
+            end,
+        },
         {  -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
             branch = "main",
@@ -58,12 +64,6 @@ require("lazy").setup({
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
             opts = { indent = { char = '▏' }, },
-        },
-        {  -- color scheme
-            colorscheme.path,
-            config = function()
-                vim.cmd("colorscheme "..colorscheme.name)
-            end,
         },
     },
     -- Configure any other settings here; see the documentation for more details
