@@ -19,8 +19,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "text" },
-    -- Automatically enable spellcheck for certain file types
-    command = "set spell"
+    callback = function()
+        -- Automatically enable spellcheck for text files
+        vim.opt.spell = true
+        -- Don't auto indent text files
+        vim.opt.autoindent = false
+        vim.opt.cindent = false
+        vim.opt.smartindent = false
+        vim.opt.indentexpr = ""
+    end
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
