@@ -44,7 +44,7 @@ require("lazy").setup({
         },
         {  -- blink.cmp
             "Saghen/blink.cmp",
-            -- dependencies = { "rafamadriz/friendly-snippets" },
+            -- dependencies = { "rafamadriz/friendly-snippets", },
             version = "1.*",
             opts = {
                 keymap = { preset = "default" },
