@@ -82,6 +82,7 @@ require("lazy").setup({
     checker = { enabled = true },
 })
 
+-- Remap vim "fold all" commands for nvim-ufo
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
