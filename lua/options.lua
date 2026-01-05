@@ -33,15 +33,9 @@ vim.opt.fillchars = {
 }
 
 -- Format status column
-vim.opt.numberwidth = 3
+vim.opt.signcolumn = "yes"
 MyStatusColumn = function()
-    local output = " %s%l "
-    -- if string.sub(vim.treesitter.foldexpr(), 1, 1) == ">" then
-    --     output = output.."%C"
-    -- else
-    --     output = output.." "
-    -- end
-    output = output.." "
+    local output = "%s %l  "
     return output
 end
 vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
