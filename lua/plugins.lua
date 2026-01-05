@@ -65,15 +65,6 @@ require("lazy").setup({
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
-        {  -- nvim-ufo
-            "kevinhwang91/nvim-ufo",
-            dependencies = { "kevinhwang91/promise-async", },
-            opts = {
-                provider_selector = function(bufnr, filetype, buftype)
-                    return { "treesitter", "indent" }
-                end,
-            },
-        },
     },
     -- Configure any other settings here; see the documentation for more details
     -- Color scheme that will be used when installing plugins
@@ -81,8 +72,4 @@ require("lazy").setup({
     -- Automatically check for plugin updates
     checker = { enabled = true },
 })
-
--- Remap vim "fold all" commands for nvim-ufo
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
