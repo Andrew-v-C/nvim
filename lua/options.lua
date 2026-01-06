@@ -107,10 +107,11 @@ end
 vim.opt.statusline = "%!v:lua.MyStatusLine()"
 
 -- Set cursor style for each mode
-vim.opt.guicursor = "n-v-c-sm:block,"
-.."i-ci-ve:ver25,"
-.."r-cr-o:hor20,"
-.."t:ver25-blinkon500-blinkoff500-TermCursor"
+vim.opt.guicursor = ""
+.."n-v-c:block,"  -- normal/visual/command: block
+.."i-ci:ver25,"  -- insert/command-insert: vertical line
+.."r-cr-o:hor20,"  -- replace/command-replace/operator-pending: horizontal line
+.."t:ver25-blinkon500-blinkoff500-TermCursor,"  -- terminal: blinking vertical line
 
 -- Misc.
 vim.opt.autochdir = true  -- Change current working directory to match file
@@ -129,11 +130,9 @@ end
 vim.opt.shell = shell
 
 -- Custom key mappings / macros
-vim.keymap.set("n", "<F2>", "ciw")  -- F2 changes the word under the cursor
-vim.keymap.set("n", "<F3>", "/")  -- F3 searches
-vim.keymap.set("n", "<F5>", "<C-l>")  -- F5 redraws the screen
-vim.keymap.set("n", "<F6>", ":edit .<Enter><Enter>")  -- F6 opens the file explorer
-vim.keymap.set("n", "<F7>", ":set spell!<Enter><Enter>")  -- F7 toggles spell check
+vim.keymap.set("n", "<F2>", "viw<C-G>")  -- F2 selects the word under the cursor
+vim.keymap.set("n", "<F6>", function() vim.cmd("edit .") end)  -- F6 opens the file explorer
+vim.keymap.set("n", "<F7>", function() vim.cmd("set spell!") end)  -- F7 toggles spell check
 vim.keymap.set("n", "<F12>", ":horizontal terminal<Enter>i")  -- F12 enters terminal mode
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")  -- Make Esc behaviour consistent in terminal mode
+vim.keymap.set("t", "<Esc>", "<C-\\><C-N>")  -- Make Esc behaviour consistent in terminal mode
 
