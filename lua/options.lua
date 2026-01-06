@@ -13,9 +13,6 @@ vim.opt.listchars = {  -- Set "list" characters
     precedes = '…',
 }
 
--- Colors and highlighting
-vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
-
 -- Set cursor style for each mode
 vim.opt.guicursor = ""
 .."n-v-c:block,"  -- normal/visual/command: block
@@ -26,6 +23,15 @@ vim.opt.guicursor = ""
 -- Windowing behaviour
 vim.opt.splitbelow = true  -- Open new windows below
 vim.opt.splitright = true  -- Open new windows to the right
+
+-- Set shell to use in terminal mode
+local shell
+if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
+    shell = "pwsh -NoLogo"
+else
+    shell = "bash"
+end
+vim.opt.shell = shell
 
 -- Set up folding
 vim.opt.foldenable = false -- Disabled for now, due to bugs
@@ -39,19 +45,11 @@ vim.opt.fillchars = {
     foldsep = ' ',
 }
 
--- Set shell to use in terminal mode
-local shell
-if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
-    shell = "pwsh -NoLogo"
-else
-    shell = "bash"
-end
-vim.opt.shell = shell
-
 -- Misc.
 vim.opt.autochdir = true  -- Change current working directory to match file
 vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
 vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0 -- Hide command line by default
+vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 
