@@ -65,6 +65,14 @@ require("lazy").setup({
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
+        {  -- oil.nvim
+            "stevearc/oil.nvim",
+            dependencies = { { "nvim-mini/mini.icons", opts = {} }, },
+            lazy = false,
+            config = function()
+                require("oil").setup()
+            end,
+        },
     },
     -- Configure any other settings here; see the documentation for more details
     -- Color scheme that will be used when installing plugins

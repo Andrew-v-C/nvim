@@ -132,6 +132,7 @@ vim.opt.shell = shell
 vim.keymap.set("n", "<F2>", "ciw")  -- F2 changes the word under the cursor
 vim.keymap.set("n", "<F3>", "/")  -- F3 searches
 vim.keymap.set("n", "<F5>", "<C-l>")  -- F5 redraws the screen
+vim.keymap.set("n", "<F6>", ":edit .<Enter><Enter>")  -- F6 opens the file explorer
 vim.keymap.set("n", "<F7>", ":set spell!<Enter><Enter>")  -- F7 toggles spell check
 vim.keymap.set("n", "<F12>", ":horizontal terminal<Enter>i")  -- F12 enters terminal mode
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")  -- Make Esc behaviour consistent in terminal mode
