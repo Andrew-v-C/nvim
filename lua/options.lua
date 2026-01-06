@@ -40,7 +40,7 @@ MyStatusColumn = function()
 end
 vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
 
--- Format status line (highlight groups are set in autocommands)
+-- Format status line (highlight groups are set in auto-commands)
 local modeNames = {
     ["n"] = "NORMAL",
     ["v"] = "VISUAL",
@@ -129,6 +129,10 @@ end
 vim.opt.shell = shell
 
 -- Custom key mappings / macros
-vim.keymap.set("n", "<F12>", ":vert term<Enter>i")  -- Press F12 to enter terminal mode
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")  -- Make Esc behave the same in terminal mode
+vim.keymap.set("n", "<F2>", "ciw")  -- F2 changes the word under the cursor
+vim.keymap.set("n", "<F3>", "/")  -- F3 searches
+vim.keymap.set("n", "<F5>", "<C-l>")  -- F5 redraws the screen
+vim.keymap.set("n", "<F7>", ":set spell!<Enter><Enter>")  -- F7 toggles spell check
+vim.keymap.set("n", "<F12>", ":horizontal terminal<Enter>i")  -- F12 enters terminal mode
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")  -- Make Esc behaviour consistent in terminal mode
 
