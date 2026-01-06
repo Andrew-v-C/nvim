@@ -13,12 +13,19 @@ vim.opt.listchars = {  -- Set "list" characters
     precedes = '…',
 }
 
+-- Colors and highlighting
+vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
+
+-- Set cursor style for each mode
+vim.opt.guicursor = ""
+.."n-v-c:block,"  -- normal/visual/command: block
+.."i-ci:ver25,"  -- insert/command-insert: vertical line
+.."r-cr-o:hor20,"  -- replace/command-replace/operator-pending: horizontal line
+.."t:ver25-blinkon500-blinkoff500-TermCursor,"  -- terminal: blinking vertical line
+
 -- Windowing behaviour
 vim.opt.splitbelow = true  -- Open new windows below
 vim.opt.splitright = true  -- Open new windows to the right
-
--- Colors and highlighting
-vim.opt.termguicolors = true  -- Enable 24-bit color in TUI
 
 -- Set up folding
 vim.opt.foldenable = false -- Disabled for now, due to bugs
@@ -32,94 +39,6 @@ vim.opt.fillchars = {
     foldsep = ' ',
 }
 
--- Format status column
-vim.opt.signcolumn = "yes"
-MyStatusColumn = function()
-    local output = "%s %l  "
-    return output
-end
-vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
-
--- Format status line (highlight groups are set in auto-commands)
-local modeNames = {
-    ["n"] = "NORMAL",
-    ["v"] = "VISUAL",
-    ["V"] = "VISUAL LINE",
-    [""]= "VISUAL BLOCK",
-    ["s"] = "SELECT",
-    ["S"] = "SELECT LINE",
-    [""]= "SELECT BLOCK",
-    ["i"] = "INSERT",
-    ["R"] = "REPLACE",
-    ["c"] = "COMMAND",
-    ["t"] = "TERMINAL",
-}
-local modeHighlights = {
-    ["n"] = "StatusLineNormal",
-    ["v"] = "StatusLineVisual",
-    ["V"] = "StatusLineVisual",
-    [""]= "StatusLineVisual",
-    ["s"] = "StatusLineSelect",
-    ["S"] = "StatusLineSelect",
-    [""]= "StatusLineSelect",
-    ["i"] = "StatusLineInsert",
-    ["R"] = "StatusLineReplace",
-    ["c"] = "StatusLineCommand",
-    ["t"] = "StatusLineTerminal",
-}
-local modeBorderHighlights = {
-    ["n"] = "StatusLineBorderNormal",
-    ["v"] = "StatusLineBorderVisual",
-    ["V"] = "StatusLineBorderVisual",
-    [""]= "StatusLineBorderVisual",
-    ["s"] = "StatusLineBorderSelect",
-    ["S"] = "StatusLineBorderSelect",
-    [""]= "StatusLineBorderSelect",
-    ["i"] = "StatusLineBorderInsert",
-    ["R"] = "StatusLineBorderReplace",
-    ["c"] = "StatusLineBorderCommand",
-    ["t"] = "StatusLineBorderTerminal",
-}
-MyStatusLine = function()
-    local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
-    local output = ""
-    .."%#"..modeHighlights[mode].."# "..modeNames[mode].." "  -- Current mode
-    .."%#"..modeBorderHighlights[mode].."#"  -- Border for current mode
-    .."%## %<%F "  -- File path
-    .."%#WarningMsg#%{&modified ? ' ' : ''}"  -- Show if file was modified
-    .."%##%="  -- Spacing
-    local count = vim.diagnostic.count()  -- Diagnostics count
-    local signs = vim.diagnostic.config().signs.text
-    if count[1] ~= nil then
-        output = output.."%#DiagnosticError# "..signs[1].." "..count[1].." "
-    end
-    if count[2] ~= nil then
-        output = output.."%#DiagnosticWarn# "..signs[2].." "..count[2].." "
-    end
-    if count[3] ~= nil then
-        output = output.."%#DiagnosticInfo# "..signs[3].." "..count[3].." "
-    end
-    if count[4] ~= nil then
-        output = output.."%#DiagnosticHint# "..signs[4].." "..count[4].." "
-    end
-    return output
-end
-vim.opt.statusline = "%!v:lua.MyStatusLine()"
-
--- Set cursor style for each mode
-vim.opt.guicursor = ""
-.."n-v-c:block,"  -- normal/visual/command: block
-.."i-ci:ver25,"  -- insert/command-insert: vertical line
-.."r-cr-o:hor20,"  -- replace/command-replace/operator-pending: horizontal line
-.."t:ver25-blinkon500-blinkoff500-TermCursor,"  -- terminal: blinking vertical line
-
--- Misc.
-vim.opt.autochdir = true  -- Change current working directory to match file
-vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
-vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
-vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
-vim.opt.cmdheight = 0 -- Hide command line by default
-
 -- Set shell to use in terminal mode
 local shell
 if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
@@ -129,10 +48,10 @@ else
 end
 vim.opt.shell = shell
 
--- Custom key mappings / macros
-vim.keymap.set("n", "<F2>", "viw<C-G>")  -- F2 selects the word under the cursor
-vim.keymap.set("n", "<F6>", function() vim.cmd("edit .") end)  -- F6 opens the file explorer
-vim.keymap.set("n", "<F7>", function() vim.cmd("set spell!") end)  -- F7 toggles spell check
-vim.keymap.set("n", "<F12>", ":horizontal terminal<Enter>i")  -- F12 enters terminal mode
-vim.keymap.set("t", "<Esc>", "<C-\\><C-N>")  -- Make Esc behaviour consistent in terminal mode
+-- Misc.
+vim.opt.autochdir = true  -- Change current working directory to match file
+vim.opt.virtualedit = "block"  -- Use virtual edit in visual block mode
+vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
+vim.opt.showmode = false  -- Don't show current mode in command line (already shown in status line)
+vim.opt.cmdheight = 0 -- Hide command line by default
 
