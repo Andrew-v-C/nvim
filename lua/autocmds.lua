@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "python", "c", "cpp", "cmake" },
+    pattern = { "python", "cpp", "cmake" },
     callback = function(type)
         -- Automatically install tree-sitter parsers
         vim.cmd("TSInstall "..type.match)
