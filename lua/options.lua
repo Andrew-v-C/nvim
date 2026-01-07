@@ -23,6 +23,7 @@ vim.opt.guicursor = ""
 -- Windowing behaviour
 vim.opt.splitbelow = true  -- Open new windows below
 vim.opt.splitright = true  -- Open new windows to the right
+vim.opt.winborder = "rounded"  -- Set border for floating windows
 
 -- Set shell to use in terminal mode
 local shell
