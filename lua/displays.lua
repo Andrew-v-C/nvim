@@ -2,7 +2,7 @@
 -- Format status column
 vim.opt.signcolumn = "yes"
 MyStatusColumn = function()
-    local output = "%s %l  "
+    local output = " %s %l  "
     return output
 end
 vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
