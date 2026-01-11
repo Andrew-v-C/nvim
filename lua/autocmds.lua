@@ -6,13 +6,14 @@ vim.api.nvim_create_autocmd("FileType", {
         if vim.treesitter.language.add(lang) then
             vim.treesitter.start()
         end
-        -- Set tabs/indentation
+        -- Set tab/indentation options
         vim.opt.expandtab = true
+        vim.opt.formatoptions = ""
+        vim.opt.cindent = true
+        -- Set default indent width
         vim.opt.shiftwidth = 4
         vim.opt.tabstop = 4
         vim.opt.softtabstop = 4
-        vim.opt.formatoptions = ""
-        vim.opt.cindent = true
     end
 })
 
