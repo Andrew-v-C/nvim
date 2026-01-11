@@ -1,4 +1,3 @@
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
     callback = function(type)
@@ -21,7 +20,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python", "cpp", "cmake" },
     callback = function(type)
         -- Automatically install tree-sitter parsers
-        vim.cmd("TSInstall "..type.match)
+        vim.cmd("TSInstall " .. type.match)
     end
 })
 
@@ -44,7 +43,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, "FoldColumn", { link = "LineNr" })
         vim.api.nvim_set_hl(0, "CursorLineFold", { link = "CursorLineNr" })
         -- Set highlight groups for status line
-        local statusbg = "#"..string.format("%06x", vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg)
+        local statusbg = "#" .. string.format("%06x", vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg)
         vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = statusbg, bg = vim.g.terminal_color_2, bold = true, })
         vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = statusbg, bg = vim.g.terminal_color_4, bold = true, })
         vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = statusbg, bg = vim.g.terminal_color_5, bold = true, })
@@ -62,10 +61,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
 })
 
-vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" })  -- Adjust command line height automatically
+vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" }) -- Adjust command line height automatically
 vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 
-vim.api.nvim_create_autocmd("TermEnter", { command = "set nospell" })  -- Don't use spellcheck in terminal mode
+vim.api.nvim_create_autocmd("TermEnter", { command = "set nospell" }) -- Don't use spellcheck in terminal mode
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function()
+        vim.lsp.buf.format()
+    end
+})
 
 vim.api.nvim_create_autocmd("VimLeave", {
     callback = function()
@@ -73,4 +78,3 @@ vim.api.nvim_create_autocmd("VimLeave", {
         vim.opt.guicursor = "a:ver25-blinkon500-blinkoff500-TermCursor"
     end
 })
-

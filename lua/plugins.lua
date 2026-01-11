@@ -1,4 +1,3 @@
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -7,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
+            { out,                            "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -27,22 +26,22 @@ local colorscheme = require("colorscheme")
 require("lazy").setup({
     spec = {
         -- Add your plugins here
-        {  -- color scheme
+        { -- color scheme
             colorscheme.path,
             config = function()
-                vim.cmd("colorscheme "..colorscheme.name)
+                vim.cmd("colorscheme " .. colorscheme.name)
             end,
         },
-        {  -- nvim-treesitter
+        { -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
             branch = "main",
             lazy = false,
             build = ":TSUpdate",
             opts = {
-                install_dir = vim.fn.stdpath("data").."/tree-sitter",
+                install_dir = vim.fn.stdpath("data") .. "/tree-sitter",
             },
         },
-        {  -- blink.cmp
+        { -- blink.cmp
             "Saghen/blink.cmp",
             -- dependencies = { "rafamadriz/friendly-snippets", },
             version = "1.*",
@@ -55,17 +54,17 @@ require("lazy").setup({
             },
             opts_extend = { "sources.default" },
         },
-        {  -- nvim-autopairs
+        { -- nvim-autopairs
             "windwp/nvim-autopairs",
             event = "InsertEnter",
             config = true,
         },
-        {  -- indent-blankline
+        { -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
             opts = { indent = { char = '▏' }, },
         },
-        {  -- oil.nvim
+        { -- oil.nvim
             "stevearc/oil.nvim",
             dependencies = { { "nvim-mini/mini.icons", opts = {} }, },
             lazy = false,
@@ -80,4 +79,3 @@ require("lazy").setup({
     -- Automatically check for plugin updates
     checker = { enabled = true },
 })
-
