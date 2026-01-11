@@ -68,6 +68,7 @@ vim.api.nvim_create_autocmd("TermEnter", { command = "set nospell" }) -- Don't u
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
+        -- Auto-format using LSP
         vim.lsp.buf.format()
     end
 })

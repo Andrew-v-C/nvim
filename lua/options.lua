@@ -14,9 +14,9 @@ vim.opt.listchars = {     -- Set "list" characters
 
 -- Set cursor style for each mode
 vim.opt.guicursor = ""
-    .. "n-v-c:block,"                          -- normal/visual/command: block
-    .. "i-ci:ver25,"                           -- insert/command-insert: vertical line
-    .. "r-cr-o:hor20,"                         -- replace/command-replace/operator-pending: horizontal line
+    .. "n-v-c:block,"                               -- normal/visual/command: block
+    .. "i-ci:ver25,"                                -- insert/command-insert: vertical line
+    .. "r-cr-o:hor20,"                              -- replace/command-replace/operator-pending: horizontal line
     .. "t:ver25-blinkon500-blinkoff500-TermCursor," -- terminal: blinking vertical line
 
 -- Windowing behaviour
