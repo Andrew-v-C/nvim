@@ -6,6 +6,13 @@ return {
         Lua = {
             runtime = { version = "LuaJIT" },
             diagnostics = { globals = { "vim" } },
-        }
+            format = {
+                defaultConfig = {
+                    quote_style = "double",
+                    call_arg_parentheses = "always",
+                    space_before_inline_comment = "2",
+                },
+            },
+        },
     },
 }
