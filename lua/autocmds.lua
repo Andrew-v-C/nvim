@@ -61,10 +61,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
 })
 
-vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" }) -- Adjust command line height automatically
+vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" })  -- Adjust command line height automatically
 vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 
-vim.api.nvim_create_autocmd("TermEnter", { command = "set nospell" }) -- Don't use spellcheck in terminal mode
+vim.api.nvim_create_autocmd("TermEnter", { command = "set nospell" })  -- Don't use spellcheck in terminal mode
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()

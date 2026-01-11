@@ -26,13 +26,13 @@ local colorscheme = require("colorscheme")
 require("lazy").setup({
     spec = {
         -- Add your plugins here
-        { -- color scheme
+        {  -- color scheme
             colorscheme.path,
             config = function()
                 vim.cmd("colorscheme " .. colorscheme.name)
             end,
         },
-        { -- nvim-treesitter
+        {  -- nvim-treesitter
             "nvim-treesitter/nvim-treesitter",
             branch = "main",
             lazy = false,
@@ -41,7 +41,7 @@ require("lazy").setup({
                 install_dir = vim.fn.stdpath("data") .. "/tree-sitter",
             },
         },
-        { -- blink.cmp
+        {  -- blink.cmp
             "Saghen/blink.cmp",
             -- dependencies = { "rafamadriz/friendly-snippets", },
             version = "1.*",
@@ -54,17 +54,17 @@ require("lazy").setup({
             },
             opts_extend = { "sources.default" },
         },
-        { -- nvim-autopairs
+        {  -- nvim-autopairs
             "windwp/nvim-autopairs",
             event = "InsertEnter",
             config = true,
         },
-        { -- indent-blankline
+        {  -- indent-blankline
             "lukas-reineke/indent-blankline.nvim",
             main = "ibl",
-            opts = { indent = { char = '▏' }, },
+            opts = { indent = { char = "▏" }, },
         },
-        { -- oil.nvim
+        {  -- oil.nvim
             "stevearc/oil.nvim",
             dependencies = { { "nvim-mini/mini.icons", opts = {} }, },
             lazy = false,
