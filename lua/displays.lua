@@ -51,12 +51,12 @@ local modeBorderHighlights = {
 MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
     local output = ""
-        .. "%#" .. modeHighlights[mode] .. "# " .. modeNames[mode] .. " "  -- Current mode
-        .. "%#" .. modeBorderHighlights[mode] .. "#"  -- Border for current mode
-        .. "%## %<%F "  -- File path
-        .. "%#WarningMsg#%{&modified ? ' ' : ''}"  -- Show if file was modified
-        .. "%##%="  -- Spacing
-    local count = vim.diagnostic.count()  -- Diagnostics count
+        .. "%#" .. modeHighlights[mode] .. "# " .. modeNames[mode] .. " " -- Current mode
+        .. "%#" .. modeBorderHighlights[mode] .. "#" -- Border for current mode
+        .. "%## %<%F " -- File path
+        .. "%#WarningMsg#%{&modified ? ' ' : ''}" -- Show if file was modified
+        .. "%##%=" -- Spacing
+    local count = vim.diagnostic.count() -- Diagnostics count
     local signs = vim.diagnostic.config().signs.text
     if count[1] ~= nil then
         output = output .. "%#DiagnosticError# " .. signs[1] .. " " .. count[1] .. " "
