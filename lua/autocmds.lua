@@ -73,10 +73,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format()
     end
 })
-
-vim.api.nvim_create_autocmd("VimLeave", {
-    callback = function()
-        -- Revert cursor on exiting Neovim
-        vim.opt.guicursor = "a:ver25-blinkon500-blinkoff500-TermCursor"
-    end
-})
