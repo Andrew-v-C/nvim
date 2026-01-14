@@ -1,81 +1,52 @@
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out,                            "WarningMsg" },
-            { "\nPress any key to exit..." },
-        }, true, {})
-        vim.fn.getchar()
-        os.exit(1)
-    end
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- Setup lazy.nvim
-local colorscheme = require("colorscheme")
-require("lazy").setup({
-    spec = {
-        -- Add your plugins here
-        { -- color scheme
-            colorscheme.path,
-            config = function()
-                vim.cmd("colorscheme " .. colorscheme.name)
-            end,
-        },
-        { -- nvim-treesitter
-            "nvim-treesitter/nvim-treesitter",
-            branch = "main",
-            lazy = false,
-            build = ":TSUpdate",
-            opts = {
-                install_dir = vim.fn.stdpath("data") .. "/tree-sitter",
-            },
-        },
-        { -- blink.cmp
-            "Saghen/blink.cmp",
-            -- dependencies = { "rafamadriz/friendly-snippets", },
-            version = "1.*",
-            opts = {
-                keymap = { preset = "default" },
-                appearance = { nerd_font_variant = "mono", },
-                completion = { documentation = { auto_show = false, }, },
-                sources = { default = { "lsp", "path", "snippets", "buffer", }, },
-                fuzzy = { implementation = "prefer_rust_with_warning", },
-            },
-            opts_extend = { "sources.default" },
-        },
-        { -- nvim-autopairs
-            "windwp/nvim-autopairs",
-            event = "InsertEnter",
-            config = true,
-        },
-        { -- indent-blankline
-            "lukas-reineke/indent-blankline.nvim",
-            main = "ibl",
-            opts = { indent = { char = "▏" }, },
-        },
-        { -- oil.nvim
-            "stevearc/oil.nvim",
-            dependencies = { { "nvim-mini/mini.icons", opts = {} }, },
-            lazy = false,
-            config = function()
-                require("oil").setup()
-            end,
-        },
+-- Add plugins
+vim.pack.add({
+    { -- color scheme
+        src = "https://github.com/EdenEast/nightfox.nvim",
+        name = "nightfox",
     },
-    -- Configure any other settings here; see the documentation for more details
-    -- Color scheme that will be used when installing plugins
-    install = { colorscheme = { "default" } },
-    -- Automatically check for plugin updates
-    checker = { enabled = true },
+    { -- nvim-treesitter
+        src = "https://github.com/nvim-treesitter/nvim-treesitter",
+    },
+    { -- nvim-autopairs
+        src = "https://github.com/windwp/nvim-autopairs",
+    },
+    { -- indent-blankline
+        src = "https://github.com/lukas-reineke/indent-blankline.nvim",
+        name = "indent-blankline",
+    },
+    { -- blink.cmp
+        src = "https://github.com/saghen/blink.cmp",
+        version = vim.version.range("*"),
+    },
+    { -- mini.icons (required for oil.nvim)
+        src = "https://github.com/nvim-mini/mini.icons",
+    },
+    { -- oil.nvim
+        src = "https://github.com/stevearc/oil.nvim",
+    }
 })
+
+-- Set up color scheme
+vim.cmd.colorscheme("duskfox")
+
+-- Set up nvim-treesitter
+require("nvim-treesitter").install({ "python", "cpp", "cmake", })
+
+-- Set up nvim-autopairs
+require("nvim-autopairs").setup({
+    event = "InsertEnter",
+})
+
+-- Set up indent-blankline
+require("ibl").setup({
+    indent = { char = "▏" },
+})
+
+-- Set up blink.cmp
+require("blink.cmp").setup()
+
+-- Set up mini.icons
+require("mini.icons").setup()
+
+-- Set up oil.nvim
+require("oil").setup()

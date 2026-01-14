@@ -18,14 +18,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "python", "cpp", "cmake" },
-    callback = function(type)
-        -- Automatically install tree-sitter parsers
-        vim.cmd("TSInstall " .. type.match)
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
     pattern = { "text" },
     callback = function()
         -- Automatically enable spellcheck for text files
