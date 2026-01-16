@@ -52,3 +52,4 @@ vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim
 vim.opt.showmode = false          -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0             -- Hide command line by default
 vim.opt.mouse = ""                -- Disable mouse
+vim.opt.spell = true              -- Enable spell check

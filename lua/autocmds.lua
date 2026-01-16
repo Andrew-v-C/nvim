@@ -20,8 +20,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function()
-        -- Automatically enable spellcheck for markdown files
-        vim.opt.spell = true
         -- Use two-space indents for markdown files
         vim.opt.shiftwidth = 2
         vim.opt.tabstop = 2
@@ -32,8 +30,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "text" },
     callback = function()
-        -- Automatically enable spellcheck for text files
-        vim.opt.spell = true
         -- Don't auto indent text files
         vim.opt.autoindent = false
         vim.opt.cindent = false
