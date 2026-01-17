@@ -16,7 +16,7 @@ vim.pack.add({
     },
     { -- blink.cmp
         src = "https://github.com/saghen/blink.cmp",
-        version = vim.version.range("*"),
+        version = vim.version.range("1.*"),
     },
     { -- mini.icons (required for oil.nvim)
         src = "https://github.com/nvim-mini/mini.icons",
@@ -26,27 +26,15 @@ vim.pack.add({
     }
 })
 
--- Set up color scheme
+-- Set default color scheme
 vim.cmd.colorscheme("duskfox")
 
--- Set up nvim-treesitter
+-- Install tree-sitter parsers
 require("nvim-treesitter").install({ "python", "cpp", "cmake", })
 
--- Set up nvim-autopairs
-require("nvim-autopairs").setup({
-    event = "InsertEnter",
-})
-
--- Set up indent-blankline
-require("ibl").setup({
-    indent = { char = "▏" },
-})
-
--- Set up blink.cmp
+-- Set up other plugins
+require("nvim-autopairs").setup()
+require("ibl").setup({ indent = { char = "▏" }, })
 require("blink.cmp").setup()
-
--- Set up mini.icons
 require("mini.icons").setup()
-
--- Set up oil.nvim
 require("oil").setup()
