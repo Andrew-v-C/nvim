@@ -73,3 +73,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format()
     end
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    callback = function()
+        if vim.bo.filetype == "python" then
+            -- Format Python files using Black
+            vim.cmd("silent !python -m black %")
+        end
+    end
+})
