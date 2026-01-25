@@ -24,14 +24,17 @@ vim.opt.splitbelow = true     -- Open new windows below
 vim.opt.splitright = true     -- Open new windows to the right
 vim.opt.winborder = "rounded" -- Set border for floating windows
 
--- Set shell to use in terminal mode
-local shell
+-- Configure shell
 if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
-    shell = "pwsh -NoLogo"
+    vim.opt.shell = "pwsh -NoLogo"
+    vim.opt.shellcmdflag = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command"
+    vim.opt.shellquote = ""
+    vim.opt.shellxquote = ""
+    vim.opt.shellpipe = "| Out-File -Encoding UTF8 %s"
+    vim.opt.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 else
-    shell = "bash"
+    vim.opt.shell = "bash"
 end
-vim.opt.shell = shell
 
 -- Set up folding
 vim.opt.foldenable = false -- Disabled for now, due to bugs
