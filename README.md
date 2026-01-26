@@ -1,5 +1,12 @@
-### Required external setup:
+## Required external setup
 - Note: unless otherwise specified, use native package manager (e.g. winget, apt) to install
+### Setting up the terminal/shell
+- Install a Nerd Font (e.g. JetBrainsMono)
+- Ensure Git is installed
+- Install PowerShell (not the pre-installed Windows Powershell)
+- Ensure terminal of choice (e.g. Alacritty) is installed
+- Configure terminal settings (default to PowerShell, color scheme, etc.)
+### Setting up Neovim
 #### General:
 - Install npm (needed for some packages):
   - Windows: `winget install OpenJS.NodeJS`
