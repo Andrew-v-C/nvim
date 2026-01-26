@@ -1,4 +1,4 @@
-Required external setup:
+###Required external setup:###
 - Install npm (needed for some packages):
   - Windows: `winget install OpenJS.NodeJS`
   - Linux: `sudo apt install npm`
@@ -21,9 +21,5 @@ Required external setup:
       - Install LLVM: `winget install LLVM.LLVM`
       - Add `C:\Program Files\LLVM\bin` to Path environment variable
     - Linux: `sudo apt install clang`
-  - Install Ninja build system:
-    - Windows: `winget install Ninja-build.Ninja`
-    - Linux: `sudo apt install ninja-build`
-  - Install clangd:
-    - Windows: `winget install LLVM.clangd`
-    - Linux: `sudo apt install clangd`
+  - Install Ninja build system
+  - Install clangd
