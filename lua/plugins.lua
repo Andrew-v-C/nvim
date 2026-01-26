@@ -23,7 +23,10 @@ vim.pack.add({
     },
     { -- oil.nvim
         src = "https://github.com/stevearc/oil.nvim",
-    }
+    },
+    { -- GitHub Copilot
+        src = "https://github.com/github/copilot.vim",
+    },
 })
 
 -- Set default color scheme
