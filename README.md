@@ -11,11 +11,6 @@
   - Linux:
     - Download [latest release](https://github.com/LuaLS/lua-language-server/releases/latest)
     - Add to PATH (in .profile), e.g. `export PATH=$PATH:~/.Software/lua-language-server/bin`
-#### Python toolchain:
-- Ensure Python is installed
-- Ensure pip is installed
-- Install Pyright: `(sudo) npm install -g pyright`
-- Install Black: `pip install black`
 #### C/C++ toolchain:
 - On Windows: install Visual Studio Build Tools; add "Desktop development with C++" workload
 - Install CMake
@@ -26,3 +21,8 @@
   - Linux: `sudo apt install clang`
 - Install Ninja build system
 - Install clangd
+#### Python toolchain:
+- Ensure Python is installed
+- Ensure pip is installed
+- Install Pyright: `(sudo) npm install -g pyright`
+- Install Black: `pip install black`
