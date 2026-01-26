@@ -1,4 +1,5 @@
 ### Required external setup:
+#### General:
 - Install npm (needed for some packages):
   - Windows: `winget install OpenJS.NodeJS`
   - Linux: `sudo apt install npm`
