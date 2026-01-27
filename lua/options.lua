@@ -48,6 +48,14 @@ vim.opt.fillchars = {
     foldsep = " ",
 }
 
+-- Disable Copilot for certain file types
+vim.g.copilot_filetypes = {
+    ["*"] = true,
+    oil = false,
+    markdown = false,
+    text = false,
+}
+
 -- Misc.
 vim.opt.autochdir = true          -- Change current working directory to match file
 vim.opt.virtualedit = "block"     -- Use virtual edit in visual block mode
