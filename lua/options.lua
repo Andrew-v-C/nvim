@@ -48,6 +48,10 @@ vim.opt.fillchars = {
     foldsep = " ",
 }
 
+-- Format status column
+vim.opt.signcolumn = "yes"
+vim.opt.statuscolumn = " %s %l  "
+
 -- Disable Copilot for certain file types
 vim.g.copilot_filetypes = {
     ["*"] = true,

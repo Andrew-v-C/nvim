@@ -43,30 +43,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-        -- Set highlight groups for fold column
-        vim.api.nvim_set_hl(0, "FoldColumn", { link = "LineNr" })
-        vim.api.nvim_set_hl(0, "CursorLineFold", { link = "CursorLineNr" })
-        -- Set highlight groups for status line
-        local statusbg = "#" .. string.format("%06x", vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg)
-        vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = statusbg, bg = vim.g.terminal_color_2, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = statusbg, bg = vim.g.terminal_color_4, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = statusbg, bg = vim.g.terminal_color_5, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = statusbg, bg = vim.g.terminal_color_3, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = statusbg, bg = vim.g.terminal_color_1, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = statusbg, bg = vim.g.terminal_color_6, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = statusbg, bg = vim.g.terminal_color_7, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderNormal", { fg = vim.g.terminal_color_2, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderVisual", { fg = vim.g.terminal_color_4, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderSelect", { fg = vim.g.terminal_color_5, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderInsert", { fg = vim.g.terminal_color_3, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
-        vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_7, })
-    end
-})
-
 vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" }) -- Adjust command line height automatically
 vim.api.nvim_create_autocmd("CmdlineLeave", { command = "set cmdheight=0" })
 

@@ -1,6 +1,6 @@
 require("autocmds")
 require("options")
+require("statusline")
 require("plugins")
 require("lsp")
-require("displays")
 require("keymaps")

@@ -1,12 +1,6 @@
--- Format status column
-vim.opt.signcolumn = "yes"
-MyStatusColumn = function()
-    local output = " %s %l  "
-    return output
-end
-vim.opt.statuscolumn = "%!v:lua.MyStatusColumn()"
+-- Custom status line; must be loaded BEFORE color scheme
 
--- Declare highlight groups for different modes (set in auto-commands)
+-- Declare highlight groups for different modes
 local modeNames = {
     ["n"] = "NORMAL",
     ["v"] = "VISUAL",
@@ -47,7 +41,7 @@ local modeBorderHighlights = {
     ["t"] = "StatusLineBorderTerminal",
 }
 
--- Format status line
+-- Declare function to format status line
 MyStatusLine = function()
     local mode = string.sub(vim.api.nvim_get_mode().mode, 1, 1)
     local output = ""
@@ -72,4 +66,27 @@ MyStatusLine = function()
     end
     return output
 end
-vim.opt.statusline = "%!v:lua.MyStatusLine()"
+
+-- Create auto-command to trigger when color scheme is loaded
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        -- Set highlight groups
+        local statusbg = "#" .. string.format("%06x", vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg)
+        vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = statusbg, bg = vim.g.terminal_color_2, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = statusbg, bg = vim.g.terminal_color_4, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = statusbg, bg = vim.g.terminal_color_5, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = statusbg, bg = vim.g.terminal_color_3, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = statusbg, bg = vim.g.terminal_color_1, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = statusbg, bg = vim.g.terminal_color_6, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = statusbg, bg = vim.g.terminal_color_7, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderNormal", { fg = vim.g.terminal_color_2, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderVisual", { fg = vim.g.terminal_color_4, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderSelect", { fg = vim.g.terminal_color_5, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderInsert", { fg = vim.g.terminal_color_3, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderReplace", { fg = vim.g.terminal_color_1, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderCommand", { fg = vim.g.terminal_color_6, })
+        vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = vim.g.terminal_color_7, })
+        -- Format status line
+        vim.opt.statusline = "%!v:lua.MyStatusLine()"
+    end
+})
