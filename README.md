@@ -3,7 +3,7 @@
 ### Setting up the terminal/shell
 - Install a Nerd Font (e.g. JetBrainsMono)
 - Install Git
-- On Windows: install PowerShell (not the pre-installed Windows Powershell)
+- On Windows: install PowerShell (not the pre-installed Windows PowerShell)
 - Ensure terminal of choice (e.g. Alacritty) is installed
 - Configure terminal settings (default shell, font, color scheme, etc.)
 ### Setting up Neovim
@@ -28,6 +28,15 @@
   - Linux: `sudo apt install clang`
 - Install Ninja build system
 - Install clangd
+#### Arduino toolchain:
+- Ensure clangd is installed
+- Install Arduino CLI
+  - Windows: `winget install ArduinoSA.CLI`
+  - Linux: install from [releases](https://github.com/arduino/arduino-cli/releases/latest)
+- Install arduino-language-server:
+  - Download [latest release](https://github.com/arduino/arduino-language-server/releases/latest)
+  - Add to Path environment variable
+- Create config file: `arduino-cli config init`
 #### Python toolchain:
 - Ensure Python is installed
 - Ensure pip is installed
