@@ -1,5 +1,5 @@
 return {
     cmd = { "clangd", "--fallback-style=WebKit" },
-    filetypes = { "c", "cpp", "arduino" },
+    filetypes = { "c", "cpp" },
     root_markers = { ".git" },
 }
