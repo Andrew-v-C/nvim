@@ -2,7 +2,6 @@
 vim.pack.add({
     {  -- color scheme
         src = "https://github.com/EdenEast/nightfox.nvim",
-        name = "nightfox",
     },
     {  -- nvim-treesitter
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
@@ -12,7 +11,6 @@ vim.pack.add({
     },
     {  -- indent-blankline
         src = "https://github.com/lukas-reineke/indent-blankline.nvim",
-        name = "indent-blankline",
     },
     {  -- blink.cmp
         src = "https://github.com/saghen/blink.cmp",
