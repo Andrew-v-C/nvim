@@ -1,30 +1,30 @@
 -- Add plugins
 vim.pack.add({
-    { -- color scheme
+    {  -- color scheme
         src = "https://github.com/EdenEast/nightfox.nvim",
         name = "nightfox",
     },
-    { -- nvim-treesitter
+    {  -- nvim-treesitter
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
     },
-    { -- nvim-autopairs
+    {  -- nvim-autopairs
         src = "https://github.com/windwp/nvim-autopairs",
     },
-    { -- indent-blankline
+    {  -- indent-blankline
         src = "https://github.com/lukas-reineke/indent-blankline.nvim",
         name = "indent-blankline",
     },
-    { -- blink.cmp
+    {  -- blink.cmp
         src = "https://github.com/saghen/blink.cmp",
         version = vim.version.range("1.*"),
     },
-    { -- mini.icons (required for oil.nvim)
+    {  -- mini.icons (required for oil.nvim)
         src = "https://github.com/nvim-mini/mini.icons",
     },
-    { -- oil.nvim
+    {  -- oil.nvim
         src = "https://github.com/stevearc/oil.nvim",
     },
-    { -- GitHub Copilot
+    {  -- GitHub Copilot
         src = "https://github.com/github/copilot.vim",
     },
 })
