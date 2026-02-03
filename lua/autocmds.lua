@@ -24,11 +24,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.shiftwidth = 2
         vim.opt.tabstop = 2
         vim.opt.softtabstop = 2
-        -- Don't auto-indent markdown files
-        vim.opt.autoindent = false
-        vim.opt.smartindent = false
-        vim.opt.cindent = false
-        vim.opt.indentexpr = ""
     end
 })
 

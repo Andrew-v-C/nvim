@@ -52,12 +52,14 @@ vim.opt.fillchars = {
 vim.opt.signcolumn = "yes"
 vim.opt.statuscolumn = " %s %l  "
 
--- Disable Copilot for certain file types
+-- Enable Copilot only for certain file types
 vim.g.copilot_filetypes = {
-    ["*"] = true,
-    oil = false,
-    markdown = false,
-    text = false,
+    ["*"] = false,
+    ["lua"] = true,
+    ["c"] = true,
+    ["cpp"] = true,
+    ["python"] = true,
+    ["arduino"] = true,
 }
 
 -- Misc.
