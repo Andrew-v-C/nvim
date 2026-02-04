@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
                 .. vim.fn.stdpath("config") .. "/.clang-format")
         elseif ftype == "python" then
             -- Format Python files using Black
-            vim.cmd("silent !python -m black %")
+            vim.cmd("silent !black %")
         end
     end
 })
