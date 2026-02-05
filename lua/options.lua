@@ -56,9 +56,10 @@ vim.opt.statuscolumn = " %s %l  "
 vim.g.copilot_filetypes = {
     ["*"] = false,
     ["lua"] = true,
+    ["python"] = true,
     ["c"] = true,
     ["cpp"] = true,
-    ["python"] = true,
+    ["cmake"] = true,
     ["arduino"] = true,
 }
 
