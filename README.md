@@ -32,6 +32,7 @@
 
 ## Tree-sitter
 - Install tree-sitter-cli: `(sudo) npm install -g tree-sitter-cli`
+- On Linux: install curl (pre-installed on Windows)
 
 
 ## Language tools
