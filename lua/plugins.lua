@@ -31,7 +31,15 @@ vim.pack.add({
 vim.cmd.colorscheme("duskfox")
 
 -- Install tree-sitter parsers
-require("nvim-treesitter").install({ "python", "arduino", "cmake", "markdown", })
+require("nvim-treesitter").install({
+    -- Lua comes pre-installed
+    "arduino",  -- Installs C and C++ as well
+    "bash",
+    "cmake",
+    "markdown",
+    "powershell",
+    "python",
+})
 
 -- Set up other plugins
 require("nvim-autopairs").setup()
