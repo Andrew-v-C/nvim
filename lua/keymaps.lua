@@ -4,8 +4,7 @@ vim.keymap.set("n", "=", "<NOP>")            -- Disable = key in normal mode
 vim.keymap.set("n", "<F5>", function()
     local ftype = vim.bo.filetype
     if ftype == "python" then
-        -- Save and run the current Python file
-        vim.cmd.w()
+        -- Run the current Python file
         vim.cmd("!py %")
     end
 end)
