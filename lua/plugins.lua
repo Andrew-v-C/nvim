@@ -1,7 +1,10 @@
+-- Load color scheme
+local colorscheme = require("colorscheme")
+
 -- Add plugins
 vim.pack.add({
     {  -- color scheme
-        src = "https://github.com/EdenEast/nightfox.nvim",
+        src = colorscheme.url,
     },
     {  -- nvim-treesitter
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
@@ -27,8 +30,8 @@ vim.pack.add({
     },
 })
 
--- Set default color scheme
-vim.cmd.colorscheme("duskfox")
+-- Set color scheme
+vim.cmd.colorscheme(colorscheme.name)
 
 -- Install tree-sitter parsers
 require("nvim-treesitter").install({
