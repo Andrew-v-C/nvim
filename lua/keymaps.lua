@@ -10,11 +10,3 @@ vim.keymap.set("n", "<M-CR>", function()
     -- Perform code action
     vim.lsp.buf.code_action()
 end)
-
-vim.keymap.set("n", "<M-r>", function()
-    local ftype = vim.bo.filetype
-    if ftype == "python" then
-        -- Run the current Python file
-        vim.cmd("!py %")
-    end
-end)
