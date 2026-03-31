@@ -27,11 +27,6 @@ vim.opt.winborder = "rounded"  -- Set border for floating windows
 -- Configure shell
 if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
     vim.opt.shell = "pwsh -NoLogo"
-    vim.opt.shellcmdflag = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command"
-    vim.opt.shellquote = ""
-    vim.opt.shellxquote = ""
-    vim.opt.shellpipe = "| Out-File -Encoding UTF8 %s"
-    vim.opt.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 else
     vim.opt.shell = "bash"
 end
@@ -55,19 +50,19 @@ vim.opt.statuscolumn = " %s %l  "
 -- Enable Copilot only for certain file types
 vim.g.copilot_filetypes = {
     ["*"] = false,
+    ["arduino"] = true,
+    ["c"] = true,
+    ["cmake"] = true,
+    ["cpp"] = true,
     ["lua"] = true,
     ["python"] = true,
-    ["c"] = true,
-    ["cpp"] = true,
-    ["cmake"] = true,
-    ["arduino"] = true,
 }
 
 -- Misc.
 vim.opt.autochdir = true           -- Change current working directory to match file
-vim.opt.virtualedit = "block"      -- Use virtual edit in visual block mode
 vim.opt.clipboard = "unnamedplus"  -- Sync clipboard between OS and Neovim
-vim.opt.showmode = false           -- Don't show current mode in command line (already shown in status line)
 vim.opt.cmdheight = 0              -- Hide command line by default
 vim.opt.mouse = ""                 -- Disable mouse
+vim.opt.showmode = false           -- Don't show current mode in command line (already shown in status line)
 vim.opt.spell = true               -- Enable spell check
+vim.opt.virtualedit = "block"      -- Use virtual edit in visual block mode
