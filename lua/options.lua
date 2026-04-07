@@ -27,6 +27,11 @@ vim.opt.winborder = "rounded"  -- Set border for floating windows
 -- Configure shell
 if string.sub(vim.loop.os_uname().sysname, 1, 7) == "Windows" then
     vim.opt.shell = "pwsh -NoLogo"
+    vim.opt.shellcmdflag = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command"
+    vim.opt.shellquote = ""
+    vim.opt.shellxquote = ""
+    vim.opt.shellpipe = "| Out-File -Encoding UTF8 %s"
+    vim.opt.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 else
     vim.opt.shell = "bash"
 end
