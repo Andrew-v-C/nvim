@@ -52,7 +52,7 @@ vim.opt.fillchars = {
 vim.opt.signcolumn = "yes"
 vim.opt.statuscolumn = " %s %l  "
 
--- Enable Copilot only for certain file types
+-- Keep Copilot disabled by default (only enable for certain file types)
 vim.g.copilot_filetypes = {
     ["*"] = false,
     ["arduino"] = true,
