@@ -12,7 +12,7 @@ end
 -- Configure diagnostics
 vim.diagnostic.config({
     severity_sort = true,
-    virtual_text = { severity = vim.diagnostic.severity.ERROR, },
+    virtual_text = { severity = vim.diagnostic.severity.ERROR },
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "",

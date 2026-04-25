@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.shiftwidth = 4
         vim.opt.tabstop = 4
         vim.opt.softtabstop = 4
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.cindent = false
         vim.opt.smartindent = false
         vim.opt.indentexpr = ""
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.cindent = false
         vim.opt.smartindent = false
         vim.opt.indentexpr = ""
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("CmdlineEnter", { command = "set cmdheight=1" })  -- Adjust command line height automatically
@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
             -- Format Lua files using LSP
             vim.lsp.buf.format()
         end
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -69,5 +69,5 @@ vim.api.nvim_create_autocmd("BufWritePost", {
             -- Format Python files using Ruff
             vim.cmd("silent !ruff format %")
         end
-    end
+    end,
 })

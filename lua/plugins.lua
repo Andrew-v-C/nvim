@@ -46,7 +46,7 @@ require("nvim-treesitter").install({
 
 -- Set up other plugins
 require("nvim-autopairs").setup()
-require("ibl").setup({ indent = { char = "▏" }, })
+require("ibl").setup({ indent = { char = "▏" } })
 require("blink.cmp").setup()
 require("mini.icons").setup()
 require("oil").setup()

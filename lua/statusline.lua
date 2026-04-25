@@ -82,13 +82,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         local white = vim.g.terminal_color_7
         -- Set highlight groups
         local statusbg = "#" .. string.format("%06x", vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg)
-        vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = statusbg, bg = green, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = statusbg, bg = blue, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = statusbg, bg = purple, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = statusbg, bg = yellow, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = statusbg, bg = red, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = statusbg, bg = cyan, bold = true, })
-        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = statusbg, bg = white, bold = true, })
+        vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = statusbg, bg = green, bold = true })
+        vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = statusbg, bg = blue, bold = true })
+        vim.api.nvim_set_hl(0, "StatusLineSelect", { fg = statusbg, bg = purple, bold = true })
+        vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = statusbg, bg = yellow, bold = true })
+        vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = statusbg, bg = red, bold = true })
+        vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = statusbg, bg = cyan, bold = true })
+        vim.api.nvim_set_hl(0, "StatusLineTerminal", { fg = statusbg, bg = white, bold = true })
         vim.api.nvim_set_hl(0, "StatusLineBorderNormal", { fg = green })
         vim.api.nvim_set_hl(0, "StatusLineBorderVisual", { fg = blue })
         vim.api.nvim_set_hl(0, "StatusLineBorderSelect", { fg = purple })
@@ -98,5 +98,5 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, "StatusLineBorderTerminal", { fg = white })
         -- Format status line
         vim.opt.statusline = "%!v:lua.MyStatusLine()"
-    end
+    end,
 })
