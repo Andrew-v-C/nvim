@@ -8,10 +8,11 @@ return {
             diagnostics = { globals = { "vim" } },
             format = {
                 defaultConfig = {
-                    quote_style = "double",
                     call_arg_parentheses = "always",
-                    space_before_inline_comment = "2",
+                    quote_style = "double",
                     space_after_comment_dash = "true",
+                    space_before_inline_comment = "2",
+                    trailing_table_separator = "smart",
                 },
             },
         },
