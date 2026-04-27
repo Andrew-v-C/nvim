@@ -18,6 +18,16 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "toml" },
+    callback = function()
+        -- Use two-space indents for TOML files
+        vim.opt.shiftwidth = 2
+        vim.opt.tabstop = 2
+        vim.opt.softtabstop = 2
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function()
         -- Use two-space indents for markdown files
@@ -63,15 +73,15 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         local ftype = vim.bo.filetype
         if ftype == "c" or ftype == "cpp" or ftype == "arduino" then
             -- Format C/C++ and Arduino files using clang-format
-            vim.cmd("silent !clang-format -i % --style=file:"
+            vim.cmd("silent !clang-format -i %:p --style=file:"
                 .. vim.fn.stdpath("config") .. "/format/.clang-format")
         elseif ftype == "python" then
             -- Format Python files using Ruff
-            vim.cmd("silent !ruff format %")
+            vim.cmd("silent !ruff format %:p")
         elseif ftype == "toml" then
-            -- Format TOML files using Taplo
-            vim.cmd("silent !taplo fmt -c "
-                .. vim.fn.stdpath("config") .. "/format/.taplo.toml" .. "%")
+            -- Format TOML files using Taplo (forward slashes required in path)
+            local path = vim.fn.expand("%:p"):gsub("\\", "/")
+            vim.cmd("silent !taplo fmt " .. path)
         end
     end,
 })
