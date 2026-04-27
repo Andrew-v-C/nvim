@@ -64,13 +64,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         if ftype == "c" or ftype == "cpp" or ftype == "arduino" then
             -- Format C/C++ and Arduino files using clang-format
             vim.cmd("silent !clang-format -i % --style=file:"
-                .. vim.fn.stdpath("config") .. "/.clang-format")
+                .. vim.fn.stdpath("config") .. "/format/.clang-format")
         elseif ftype == "python" then
             -- Format Python files using Ruff
             vim.cmd("silent !ruff format %")
         elseif ftype == "toml" then
             -- Format TOML files using Taplo
-            vim.cmd("silent !taplo format %")
+            vim.cmd("silent !taplo fmt -c "
+                .. vim.fn.stdpath("config") .. "/format/.taplo.toml" .. "%")
         end
     end,
 })
