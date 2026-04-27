@@ -42,6 +42,7 @@ require("nvim-treesitter").install({
     "markdown",
     "powershell",
     "python",
+    "toml",
 })
 
 -- Set up other plugins

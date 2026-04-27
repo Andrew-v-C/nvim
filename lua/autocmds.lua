@@ -68,6 +68,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         elseif ftype == "python" then
             -- Format Python files using Ruff
             vim.cmd("silent !ruff format %")
+        elseif ftype == "toml" then
+            -- Format TOML files using Taplo
+            vim.cmd("silent !taplo format %")
         end
     end,
 })
